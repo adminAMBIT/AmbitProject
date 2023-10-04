@@ -57,10 +57,10 @@
                             </div>
 
                             <div class="col-span-full">
-                                <label for="street-address"
+                                <label for="street_address"
                                     class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
                                 <div class="mt-2">
-                                    <input type="text" name="street-address" id="street-address"
+                                    <input type="text" name="street_address" id="street_address"
                                         autocomplete="street-address"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
@@ -75,19 +75,19 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
+                                <label for="province" class="block text-sm font-medium leading-6 text-gray-900">State /
                                     Province</label>
                                 <div class="mt-2">
-                                    <input type="text" name="region" id="region" autocomplete="address-level1"
+                                    <input type="text" name="province" id="province" autocomplete="address-level1"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
+                                <label for="postal_code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                                     Postal code</label>
                                 <div class="mt-2">
-                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
+                                    <input type="text" name="postal_code" id="postal_code" autocomplete="postal_code"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -102,27 +102,27 @@
 
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
                             <div class="sm:col-span-3">
-                                <label for="representant-name"
+                                <label for="representant_name"
                                     class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                                 <div class="mt-2">
-                                    <input type="text" name="representant-name" id="representant-name" autocomplete="given-name"
+                                    <input type="text" name="representant_name" id="representant_name" autocomplete="given-name"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-3">
-                                <label for="representant-dni"
+                                <label for="representant_dni"
                                     class="block text-sm font-medium leading-6 text-gray-900">DNI</label>
                                 <div class="mt-2">
-                                    <input type="text" name="representant-dni" id="representant-dni" autocomplete="family-name"
+                                    <input type="text" name="representant_dni" id="representant_dni" autocomplete="family-name"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-4">
-                                <label for="representant-position" class="block text-sm font-medium leading-6 text-gray-900">Position</label>
+                                <label for="representant_position" class="block text-sm font-medium leading-6 text-gray-900">Position</label>
                                 <div class="mt-2">
-                                    <input id="representant-position" name="representant-position" type="email"
+                                    <input id="representant_position" name="representant_position" type="email"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
