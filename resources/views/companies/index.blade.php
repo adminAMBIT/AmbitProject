@@ -11,6 +11,6 @@
     </x-slot>
 
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
-       
+        <livewire:companies-table/>
     </div>
 </x-app-layout>
