@@ -124,7 +124,7 @@
                         <p class="mt-2 text-sm text-gray-700">The company's contacts </p>
                     </div>
                     <div class="mt-4 flex-none">
-                        <a type="button" href="{{ route('representants.create', ['company_id' => $company->id]) }}"
+                        <a type="button" href="{{ route('contacts.create', ['company_id' => $company->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Contact</a>
                     </div>                    
                 </div>
@@ -159,10 +159,8 @@
                                         
                                         <tr>
                                             <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {{ $company->representant->name }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
-                                                $company->representant->email }}</td>
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                 <a href="{{ route('representants.show', ['id' => $company->representant->id]) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
@@ -177,9 +175,5 @@
                 </div>
             </div>
         </div>
-
-        
-
-
     </div>
 </x-app-layout>

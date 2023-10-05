@@ -43,6 +43,13 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
+                                        @if($contactTypes->isEmpty())
+                                        <tr>
+                                            <td colspan="2" class="py-4 text-center pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                No contact types found
+                                            </td>
+                                        </tr>
+                                        @else
                                         @foreach ($contactTypes as $contactType)
                                         <tr>
                                             <td
@@ -55,6 +62,7 @@
                                             </td>
                                         </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

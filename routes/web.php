@@ -5,6 +5,8 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\RepresentantController;
 use App\Http\Controllers\ContactTypeController;
+use App\Http\Controllers\ContactController;
+
 
 
 /*
@@ -36,7 +38,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/projects/{id}/edit', [ProjectController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
-
     // COMPANIES
     Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
     Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
@@ -60,6 +61,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/contactTypes/{id}', [ContactTypeController::class, 'edit'])->name('contactTypes.edit');
     Route::post('/contactTypes/{id}', [ContactTypeController::class, 'update']);
     Route::delete('/contactTypes/{id}', [ContactTypeController::class, 'destroy'])->name('contactTypes.destroy');
+
+    // CONTACTS
+    Route::get('/companies/{company_id}/create-contact', [ContactController::class, 'create'])->name('contacts.create');
+    Route::post('/companies/{company_id}/create-contact', [ContactController::class, 'store'])->name('contacts.store');
 
 
 });
