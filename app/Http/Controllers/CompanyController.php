@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Support\Facades\Validator;
+
 
 class CompanyController extends Controller
 {
@@ -28,6 +30,31 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required|unique:companies,name',
+            'cif' => 'required|unique:companies,cif',
+            'email' => 'required|unique:companies,email',
+            'country' => 'required|string|max:255',
+            'street_address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'postal_code' => 'required|string|max:255',
+        ];
+
+        $customMessages = [
+            'unique' => 'This :attribute alredy exists.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         Company::create([
             'name' => $request->name,
             'cif' => $request->cif,
@@ -72,6 +99,31 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $rules = [
+            'name' => 'required|unique:companies,name,' . $id,
+            'cif' => 'required|unique:companies,cif,' . $id,
+            'email' => 'required|unique:companies,email,' . $id,
+            'country' => 'required|string|max:255',
+            'street_address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'postal_code' => 'required|string|max:255',
+        ];
+
+        $customMessages = [
+            'unique' => 'This :attribute alredy exists.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
         $company = Company::find($id);
 
         $company->name = $request->name;

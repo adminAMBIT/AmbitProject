@@ -13,7 +13,6 @@ class Representant extends Model
         'name',
         'nif',
         'email',
-        'position',
         'username',
         'password',
         'company_id',

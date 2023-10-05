@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('nif');
             $table->string('email');
-            $table->string('position');
             $table->string('username');
             $table->string('password');
             $table->unsignedBigInteger('company_id');

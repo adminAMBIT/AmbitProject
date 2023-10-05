@@ -22,8 +22,8 @@ class Company extends Model
     ];
 
     
-    public function representants()
+    public function representant()
     {
-        return $this->hasMany(Representant::class);
+        return $this->hasOne(Representant::class);
     }
 }

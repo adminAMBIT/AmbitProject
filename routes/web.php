@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/companies/{company_id}/create-respresentant', [RepresentantController::class, 'create'])->name('representants.create');
     Route::post('/companies/{company_id}/create-respresentant', [RepresentantController::class, 'store'])->name('representants.store');
     Route::get('/representants/{id}', [RepresentantController::class, 'show'])->name('representants.show');
-
+    Route::get('/representants/{id}/edit', [RepresentantController::class, 'edit'])->name('representants.edit');
+    Route::post('/representants/{id}/edit', [RepresentantController::class, 'update']);
+    Route::delete('/representants/{id}', [RepresentantController::class, 'destroy'])->name('representants.destroy');
 
 });
