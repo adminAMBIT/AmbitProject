@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\Company;
 
 class CompanyController extends Controller
@@ -38,11 +37,6 @@ class CompanyController extends Controller
             'city' => $request->city,
             'province' => $request->province,
             'postal_code' => $request->postal_code,
-            'representant_name' => $request->representant_name,
-            'representant_dni' => $request->representant_dni,
-            'representant_position' => $request->representant_position,
-            'username' => $request->cif,
-            'password' => Str::random(10)
         ]);
 
         return redirect()->route('companies.index');
@@ -53,7 +47,12 @@ class CompanyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
+        $company = Company::find($id);
+
+        return view('companies.show', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -61,7 +60,11 @@ class CompanyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $company = Company::find($id);
+
+        return view('companies.edit', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -69,7 +72,20 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $company = Company::find($id);
+
+        $company->name = $request->name;
+        $company->cif = $request->cif;
+        $company->email = $request->email;
+        $company->country = $request->country;
+        $company->street_address = $request->street_address;
+        $company->city = $request->city;
+        $company->province = $request->province;
+        $company->postal_code = $request->postal_code;
+
+        $company->save();
+
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -77,6 +93,10 @@ class CompanyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $company = Company::find($id);
+
+        $company->delete();
+
+        return redirect()->route('companies.index');
     }
 }

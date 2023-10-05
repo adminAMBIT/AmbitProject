@@ -25,9 +25,9 @@ final class CompaniesTable extends PowerGridComponent
         // $this->showCheckBox();
 
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            // Exportable::make('export')
+            //     ->striped()
+            //     ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             // Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -53,7 +53,6 @@ final class CompaniesTable extends PowerGridComponent
 
            /** Example of custom column using a closure **/
             ->addColumn('name_lower', fn (Company $model) => strtolower(e($model->name)))
-
             ->addColumn('cif')
             ->addColumn('email')
             ->addColumn('country')
@@ -61,10 +60,6 @@ final class CompaniesTable extends PowerGridComponent
             ->addColumn('city')
             ->addColumn('province')
             ->addColumn('postal_code')
-            ->addColumn('representant_name')
-            ->addColumn('representant_dni')
-            ->addColumn('representant_position')
-            ->addColumn('username')
             ->addColumn('created_at_formatted', fn (Company $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
@@ -94,28 +89,25 @@ final class CompaniesTable extends PowerGridComponent
             Filter::inputText('city')->operators(['contains']),
             Filter::inputText('province')->operators(['contains']),
             Filter::inputText('postal_code')->operators(['contains']),
-            Filter::inputText('representant_name')->operators(['contains']),
-            Filter::inputText('representant_dni')->operators(['contains']),
-            Filter::inputText('representant_position')->operators(['contains']),
-            Filter::inputText('username')->operators(['contains']),
             Filter::datetimepicker('created_at'),
         ];
     }
 
-    #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
+    #[\Livewire\Attributes\On('show')]
+    public function show($rowId)
     {
-        $this->js('alert('.$rowId.')');
+        return redirect()->route('companies.show', ['id' => $rowId]);
     }
+    
 
-    public function actions(\App\Models\Company $row): array
+    public function actions(Company $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('Edit: '.$row->id)
+            Button::add('show')
+                ->slot('Show')
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->dispatch('show', ['rowId' => $row->id]),
         ];
     }
 

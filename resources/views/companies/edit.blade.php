@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Create new company') }}
+                Editing {{ $company->name }}
             </h2>
         </div>
     </x-slot>
@@ -24,7 +24,7 @@
                                     class="block text-sm font-medium leading-6 text-gray-900">Company
                                     name</label>
                                 <div class="mt-2">
-                                    <input type="text" name="name" id="name" autocomplete="given-name" required
+                                    <input type="text" name="name" id="name" value="{{ $company->name }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 <label for="cif"
                                     class="block text-sm font-medium leading-6 text-gray-900">CIF</label>
                                 <div class="mt-2">
-                                    <input type="text" name="cif" id="cif" autocomplete="family-name" required
+                                    <input type="text" name="cif" id="cif" value="{{ $company->cif }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                                     address</label>
                                 <div class="mt-2">
-                                    <input id="email" name="email" type="email" autocomplete="email" required
+                                    <input id="email" name="email" type="email" autocomplete="email" value="{{ $company->email }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <label for="street_address"
                                     class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
                                 <div class="mt-2">
-                                    <input type="text" name="street_address" id="street_address" required
+                                    <input type="text" name="street_address" id="street_address" value="{{ $company->street_address }}"
                                         autocomplete="street-address"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
@@ -60,7 +60,7 @@
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                                 <div class="mt-2">
-                                    <input type="text" name="city" id="city" autocomplete="address-level2" required
+                                    <input type="text" name="city" id="city" value="{{ $company->city }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 <label for="province" class="block text-sm font-medium leading-6 text-gray-900">State /
                                     Province</label>
                                 <div class="mt-2">
-                                    <input type="text" name="province" id="province" autocomplete="address-level1" required
+                                    <input type="text" name="province" id="province" autocomplete="address-level1" value="{{ $company->province }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                 <label for="postal_code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                                     Postal code</label>
                                 <div class="mt-2">
-                                    <input type="text" name="postal_code" id="postal_code" autocomplete="postal_code" required
+                                    <input type="text" name="postal_code" id="postal_code" autocomplete="postal_code" value="{{ $company->postal_code }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 <label for="country"
                                     class="block text-sm font-medium leading-6 text-gray-900">Country</label>
                                 <div class="mt-2">
-                                    <input id="country" name="country" type="text" required
+                                    <input id="country" name="country" type="text" autocomplete="country" value="{{ $company->country }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -95,11 +95,21 @@
                     </div>
                 </div>
 
-                <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="button" onclick="window.history.back();" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                    <button type="submit" href="{{ route('companies.store') }}"
-                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create</button>
+                <div class="mt-6 flex items-center justify-end">
+                    <a href="{{ route('companies.index') }}" class="text-sm mr-2 font-semibold leading-6 text-gray-900">Cancel</a>
+                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
                 </div>
+                
             </form>
+
+            
+
         </div>
+        <form method="POST" action="{{ route('companies.destroy', $company) }}">
+            @csrf
+            @method('DELETE')
+            <div class="mt-6 flex items-center">
+                <button type="submit" class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Delete Company</button>
+            </div>
+        </form>
 </x-app-layout>

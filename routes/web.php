@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\RepresentantController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +36,19 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
 
-    //COMPANIES
+    // COMPANIES
     Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
     Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
     Route::post('/companies/create', [CompanyController::class, 'store'])->name('companies.store');
+    Route::get('/companies/{id}', [CompanyController::class, 'show'])->name('companies.show');
+    Route::get('/companies/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+    Route::post('/companies/{id}/edit', [CompanyController::class, 'update']);
+    Route::delete('/companies/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+
+    // REPRESENTANTS
+    Route::get('/companies/{company_id}/create-respresentant', [RepresentantController::class, 'create'])->name('representants.create');
+    Route::post('/companies/{company_id}/create-respresentant', [RepresentantController::class, 'store'])->name('representants.store');
+    Route::get('/representants/{id}', [RepresentantController::class, 'show'])->name('representants.show');
 
 
 });

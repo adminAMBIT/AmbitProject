@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Representant;
 
 class Company extends Model
 {
@@ -18,18 +19,11 @@ class Company extends Model
         'city',
         'province',
         'postal_code',
-        'representant_name',
-        'representant_dni',
-        'representant_position',
-        'username',
-        'password'
     ];
 
-    protected $hidden=[
-        'password'
-    ];
-
-
-
-
+    
+    public function representants()
+    {
+        return $this->hasMany(Representant::class);
+    }
 }
