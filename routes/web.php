@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\RepresentantController;
+use App\Http\Controllers\ContactTypeController;
 
 
 /*
@@ -52,5 +53,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/representants/{id}/edit', [RepresentantController::class, 'edit'])->name('representants.edit');
     Route::post('/representants/{id}/edit', [RepresentantController::class, 'update']);
     Route::delete('/representants/{id}', [RepresentantController::class, 'destroy'])->name('representants.destroy');
+
+    // CONTACT TYPES
+    Route::get('/contactTypes/create', [ContactTypeController::class, 'create'])->name('contactTypes.create');
+    Route::post('/contactTypes/create', [ContactTypeController::class, 'store'])->name('contactTypes.store');
+    Route::get('/contactTypes/{id}', [ContactTypeController::class, 'edit'])->name('contactTypes.edit');
+    Route::post('/contactTypes/{id}', [ContactTypeController::class, 'update']);
+    Route::delete('/contactTypes/{id}', [ContactTypeController::class, 'destroy'])->name('contactTypes.destroy');
+
 
 });

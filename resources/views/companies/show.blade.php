@@ -115,6 +115,71 @@
             </div>
         </div>
 
+        <!-- CONTACTS SECTION -->
+        <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-auto">
+                        <h1 class="text-base font-semibold leading-6 text-gray-900">Contacts</h1>
+                        <p class="mt-2 text-sm text-gray-700">The company's contacts </p>
+                    </div>
+                    <div class="mt-4 flex-none">
+                        <a type="button" href="{{ route('representants.create', ['company_id' => $company->id]) }}"
+                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Contact</a>
+                    </div>                    
+                </div>
+                
+
+                <div class="mt-8 flow-root">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Name</th>
+                                                <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Email</th>
+                                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                                <span class="sr-only">Edit</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-white">
+                                        @if ($company->representant == null)
+                                        <tr>
+                                            <td colspan="3"
+                                                class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 sm:pl-6">
+                                                No representant found</td>
+                                        </tr>
+                                        @else
+                                        
+                                        <tr>
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                {{ $company->representant->name }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
+                                                $company->representant->email }}</td>
+                                            <td
+                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                <a href="{{ route('representants.show', ['id' => $company->representant->id]) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
 
     </div>
 </x-app-layout>
