@@ -57,27 +57,16 @@
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-3">
-                                <label for="username"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                            <div class="sm:col-span-2">
+                                <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Phone
+                                    </label>
                                 <div class="mt-2">
-                                    <input type="text" name="username" id="username" autocomplete="given-name" required
-                                        value="{{ old('username',$representant->username) }}"
+                                    <input id="phone" name="phone" type="text" required value="{{ old('phone', $representant->phone) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    @error('username')
-                                    <div class="text-red-600">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-3">
-                                <label for="password"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                                <div class="mt-2">
-                                    <input type="text" name="password" id="password" autocomplete="family-name" required
-                                        value="{{ old('password',$representant->password) }}"
-                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                </div>
+                                        @error('phone')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                             </div>
                         </div>
 

@@ -7,19 +7,15 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class UsersTableSeeder extends Seeder
+class UserTypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name'=>'Admin',
-            'email'=>'admin@ambit.com',
-            
-
-            'password'=> bcrypt('12341234'),
+        DB::table('user_types')->insert([
+            'name'=>'Legal Representant',
             'created_at'=>'2021-01-01 00:00:00',
             'updated_at'=>'2021-01-01 00:00:00',
         ]);

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactType;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class ContactTypeController extends Controller
+class UserTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ContactTypeController extends Controller
      */
     public function create()
     {
-        return view('contactTypes.create');
+        return view('userTypes.create');
     }
 
     /**
@@ -31,7 +31,7 @@ class ContactTypeController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|min:3| unique:contact_types,name',
+            'name' => 'required|min:3| unique:user_types,name',
         ];
 
         $customMessages = [
@@ -47,7 +47,7 @@ class ContactTypeController extends Controller
                 ->withInput();
         }
 
-        ContactType::create([
+        UserType::create([
             'name' => $request->name,
         ]);
 
@@ -67,10 +67,10 @@ class ContactTypeController extends Controller
      */
     public function edit(string $id)
     {
-        $contactType = ContactType::find($id);
+        $userType = UserType::find($id);
 
-        return view('contactTypes.edit', [
-            'contactType' => $contactType,
+        return view('userTypes.edit', [
+            'userType' => $userType,
         ]);
     }
 
@@ -80,7 +80,7 @@ class ContactTypeController extends Controller
     public function update(Request $request, string $id)
     {
         $rules = [
-            'name' => 'required|min:3| unique:contact_types,name,' . $id,
+            'name' => 'required|min:3| unique:user_types,name,' . $id,
         ];
 
         $customMessages = [
@@ -96,11 +96,11 @@ class ContactTypeController extends Controller
                 ->withInput();
         }
 
-        $contactType = ContactType::find($id);
+        $userType = UserType::find($id);
 
-        $contactType->name = $request->name;
+        $userType->name = $request->name;
 
-        $contactType->save();
+        $userType->save();
 
         return redirect()->route('companies.index');
     }
@@ -110,9 +110,9 @@ class ContactTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        $contactType = ContactType::find($id);
+        $userType = UserType::find($id);
 
-        $contactType->delete();
+        $userType->delete();
 
         return redirect()->route('companies.index');
     }

@@ -22,7 +22,7 @@
                         <p class="mt-2 text-sm text-gray-700">The comapny's legal representant</p>
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                        <a type="button" href="{{ route('contactTypes.create') }}"
+                        <a type="button" href="{{ route('userTypes.create') }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                             Contact Type</a>
                     </div>
@@ -43,22 +43,22 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                        @if($contactTypes->isEmpty())
+                                        @if($userTypes->isEmpty())
                                         <tr>
                                             <td colspan="2" class="py-4 text-center pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                 No contact types found
                                             </td>
                                         </tr>
                                         @else
-                                        @foreach ($contactTypes as $contactType)
+                                        @foreach ($userTypes as $userType)
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {{ $contactType->name }}
+                                                {{ $userType->name }}
                                                 </td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="{{ route('contactTypes.edit',['id'=>$contactType->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                <a href="{{ route('userTypes.edit',['id'=>$userType->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -71,6 +71,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </x-app-layout>

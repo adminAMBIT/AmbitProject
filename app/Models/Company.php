@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Representant;
+use App\Models\User;
 
 class Company extends Model
 {
@@ -21,9 +21,17 @@ class Company extends Model
         'postal_code',
     ];
 
-    
-    public function representant()
+    public function users()
     {
-        return $this->hasOne(Representant::class);
+        return $this->hasMany(User::class);
+    }
+
+    public function representant(){
+        return $this->users()->where('user_type_id', 1)->first();
+    }
+
+    public function contacts()
+    {
+        return $this->users()->whereNot('user_type_id', 1)->get();
     }
 }

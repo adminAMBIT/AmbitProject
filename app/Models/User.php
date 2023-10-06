@@ -27,6 +27,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nif',
+        'phone',
+        'user_type_id',
+        'company_id',
     ];
 
     /**
@@ -58,4 +62,20 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the company that owns the user.
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Get the user type that owns the user.
+     */
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
+    }
 }

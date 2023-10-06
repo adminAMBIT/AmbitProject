@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
-use App\Models\ContactType;
+use App\Models\UserType;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -15,10 +15,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $contactTypes = ContactType::all();
+        $userTypes = UserType::all();
 
         return view('companies.index', [
-            'contactTypes' => $contactTypes,
+            'userTypes' => $userTypes,
         ]);
     }
 

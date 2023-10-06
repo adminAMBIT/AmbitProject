@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\RepresentantController;
-use App\Http\Controllers\ContactTypeController;
+use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\ContactController;
 
 
@@ -56,15 +56,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::delete('/representants/{id}', [RepresentantController::class, 'destroy'])->name('representants.destroy');
 
     // CONTACT TYPES
-    Route::get('/contactTypes/create', [ContactTypeController::class, 'create'])->name('contactTypes.create');
-    Route::post('/contactTypes/create', [ContactTypeController::class, 'store'])->name('contactTypes.store');
-    Route::get('/contactTypes/{id}', [ContactTypeController::class, 'edit'])->name('contactTypes.edit');
-    Route::post('/contactTypes/{id}', [ContactTypeController::class, 'update']);
-    Route::delete('/contactTypes/{id}', [ContactTypeController::class, 'destroy'])->name('contactTypes.destroy');
-
-    // CONTACTS
-    Route::get('/companies/{company_id}/create-contact', [ContactController::class, 'create'])->name('contacts.create');
-    Route::post('/companies/{company_id}/create-contact', [ContactController::class, 'store'])->name('contacts.store');
+    Route::get('/userTypes/create', [UserTypeController::class, 'create'])->name('userTypes.create');
+    Route::post('/userTypes/create', [UserTypeController::class, 'store'])->name('userTypes.store');
+    Route::get('/userTypes/{id}', [UserTypeController::class, 'edit'])->name('userTypes.edit');
+    Route::post('/userTypes/{id}', [UserTypeController::class, 'update']);
+    Route::delete('/userTypes/{id}', [UserTypeController::class, 'destroy'])->name('userTypes.destroy');
 
 
 });
