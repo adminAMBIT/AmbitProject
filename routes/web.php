@@ -55,12 +55,19 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/representants/{id}/edit', [RepresentantController::class, 'update']);
     Route::delete('/representants/{id}', [RepresentantController::class, 'destroy'])->name('representants.destroy');
 
-    // CONTACT TYPES
+    // USER TYPES
     Route::get('/userTypes/create', [UserTypeController::class, 'create'])->name('userTypes.create');
     Route::post('/userTypes/create', [UserTypeController::class, 'store'])->name('userTypes.store');
     Route::get('/userTypes/{id}', [UserTypeController::class, 'edit'])->name('userTypes.edit');
     Route::post('/userTypes/{id}', [UserTypeController::class, 'update']);
     Route::delete('/userTypes/{id}', [UserTypeController::class, 'destroy'])->name('userTypes.destroy');
 
+    // CONTACTS
+    Route::get('/companies/{company_id}/create-contact', [ContactController::class, 'create'])->name('contacts.create');
+    Route::post('/companies/{company_id}/create-contact', [ContactController::class, 'store'])->name('contacts.store');
+    Route::get('/companies/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
+    Route::get('/companies/contacts/{id}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+    Route::post('/companies/contacts/{id}/edit', [ContactController::class, 'update']);
+    Route::delete('/companies/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
 });

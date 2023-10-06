@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Company;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -57,7 +56,6 @@ class RepresentantController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
 
         User::create([
             'name' => $request->name,

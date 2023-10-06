@@ -31,7 +31,7 @@ class UserTypeController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|min:3| unique:user_types,name',
+            'name' => 'required|min:3| unique:userTypes,name',
         ];
 
         $customMessages = [
@@ -80,7 +80,7 @@ class UserTypeController extends Controller
     public function update(Request $request, string $id)
     {
         $rules = [
-            'name' => 'required|min:3| unique:user_types,name,' . $id,
+            'name' => 'required|min:3| unique:userTypes,name,' . $id,
         ];
 
         $customMessages = [
