@@ -34,4 +34,9 @@ class Company extends Model
     {
         return $this->users()->whereNot('user_type_id', 1)->get();
     }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_company', 'company_id', 'project_id');
+    }
 }

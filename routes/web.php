@@ -70,4 +70,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/companies/contacts/{id}/edit', [ContactController::class, 'update']);
     Route::delete('/companies/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
+    // MANAGE COMOPANIES
+    Route::get('/projects/{project_id}/manage-companies', [ProjectController::class, 'manageCompanies'])->name('projects.manageCompanies.index');
+    Route::post('/projects/{project_id}/manage-companies', [ProjectController::class, 'manageCompaniesStore'])->name('projects.manageCompanies.store');
+    Route::delete('/projects/{project_id}/manage-companies/{company_id}', [ProjectController::class, 'manageCompaniesDestroy'])->name('projects.manageCompanies.destroy');
+    
 });

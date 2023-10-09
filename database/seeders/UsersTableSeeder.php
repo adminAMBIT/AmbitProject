@@ -17,8 +17,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name'=>'Admin',
             'email'=>'admin@ambit.com',
-            
-
+            'is_admin'=>true,
             'password'=> bcrypt('12341234'),
             'created_at'=>'2021-01-01 00:00:00',
             'updated_at'=>'2021-01-01 00:00:00',

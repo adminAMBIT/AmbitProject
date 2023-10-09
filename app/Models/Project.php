@@ -11,4 +11,9 @@ class Project extends Model
 
     protected $fillable = ['title', 'description'];
 
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'project_company', 'project_id', 'company_id');
+    }
+
 }
