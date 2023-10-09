@@ -19,10 +19,11 @@
                     <x-nav-link href="{{ route('projects.index') }}" :active="request()->routeIs('projects.*')">
                         {{ __('Projects') }}
                     </x-nav-link>
-
+                    @if (Auth::user()->is_admin)
                     <x-nav-link href="{{ route('companies.index') }}" :active="request()->routeIs('companies.*')">
                         {{ __('Companies') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 

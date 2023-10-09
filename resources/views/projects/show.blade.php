@@ -66,9 +66,11 @@
                             <div class="divide-y divide-gray-200">
                                 <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                                     <h2 id="notes-title" class="text-lg font-medium text-gray-900">Phases</h2>
+                                    @if(auth()->user()->is_admin)
                                     <button type="submit"
                                         class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Create Phase</button>
-                                </div>
+                                    @endif
+                                    </div>
                                 <div class="px-4 py-6 sm:px-6">
                                     <div class="flow-root">
                                         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -85,9 +87,11 @@
                                                 <tbody class="divide-y divide-gray-200 bg-white">
                                                   <tr>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">Lindsay Walton</td>
+                                                    @if(auth()->user()->is_admin)
                                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                       <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                                     </td>
+                                                    @endif
                                                   </tr>
                                     
                                                   <!-- More people... -->
