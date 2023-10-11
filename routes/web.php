@@ -80,7 +80,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     // PHASES
     Route::get('/projects/{project_id}/create-phase', [PhaseController::class, 'create'])->name('projects.phases.create');
     Route::post('/projects/{project_id}/create-phase', [PhaseController::class, 'store'])->name('projects.phases.store');
-
+    Route::get('/projects/{project_id}/phases/{phase_id}', [PhaseController::class, 'show'])->name('projects.phases.show');
     Route::get('/projects/{project_id}/edit-phase/{phase_id}', [PhaseController::class, 'edit'])->name('projects.phases.edit');
     Route::post('/projects/{project_id}/edit-phase/{phase_id}', [PhaseController::class, 'update']);
     Route::delete('/projects/{project_id}/delete-phase/{phase_id}', [PhaseController::class, 'destroy'])->name('projects.phases.destroy');

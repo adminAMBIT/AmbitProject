@@ -108,7 +108,7 @@
                                                             <tr class="group hover:bg-gray-100">
                                                                 <td
                                                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                                    <a href="#">
+                                                                    <a href="{{ route('projects.phases.show', ['project_id'=>$project->id,'phase_id'=>$phase->id]) }}">
                                                                     {{ $phase->name }} <span class="text-gray-500">({{
                                                                         $phase->is_private ? 'Private' : 'Public'
                                                                         }})</span>
@@ -124,7 +124,6 @@
                                                             </tr>
                                                             @endforeach
                                                             @endif
-
                                                             <!-- More people... -->
                                                         </tbody>
                                                     </table>

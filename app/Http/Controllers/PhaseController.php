@@ -47,9 +47,11 @@ class PhaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $project_id, string $phase_id)
     {
-        //
+        $phase = Phase::findOrFail($phase_id);
+
+        return view('phases.show', compact('phase'));
     }
 
     /**
