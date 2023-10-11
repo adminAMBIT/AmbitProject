@@ -16,4 +16,9 @@ class Project extends Model
         return $this->belongsToMany(Company::class, 'project_company', 'project_id', 'company_id');
     }
 
+    public function phases()
+    {
+        return $this->hasMany(Phase::class);
+    }
+
 }

@@ -13,6 +13,9 @@
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <livewire:companies-table/>
 
+        <hr class="my-5 border-t-2 border-gray-300">
+
+
 
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">

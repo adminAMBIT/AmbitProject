@@ -19,10 +19,15 @@
                     <!-- Description list-->
                     <section aria-labelledby="applicant-information-title">
                         <div class="bg-white shadow sm:rounded-lg">
-                            <div class="px-4 py-5 sm:px-6">
+                            <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                                 <h2 id="applicant-information-title"
                                     class="text-lg font-medium leading-6 text-gray-900">Project Information</h2>
-                                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
+                                @if(auth()->user()->is_admin)
+                                <a type="submit" href="{{ route('projects.edit', ['id' => $project->id]) }}"
+                                    class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Edit
+                                    Project</a>
+                                @endif
+
                             </div>
                             <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                                 <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -60,47 +65,73 @@
                         </div>
                     </section>
 
-                    <!-- Comments-->
+                    <!-- PHASES -->
                     <section aria-labelledby="phase-title">
                         <div class="bg-white shadow sm:overflow-hidden sm:rounded-lg">
                             <div class="divide-y divide-gray-200">
                                 <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                                     <h2 id="notes-title" class="text-lg font-medium text-gray-900">Phases</h2>
                                     @if(auth()->user()->is_admin)
-                                    <button type="submit"
-                                        class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Create Phase</button>
+                                    <a type="submit"
+                                        href="{{ route('projects.phases.create', ['project_id' => $project->id]) }}"
+                                        class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Create
+                                        Phase</a>
                                     @endif
-                                    </div>
+                                </div>
                                 <div class="px-4 py-6 sm:px-6">
                                     <div class="flow-root">
                                         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                                              <table class="min-w-full divide-y divide-gray-300">
-                                                <thead class="bg-gray-50">
-                                                  <tr>
-                                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                                    </th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody class="divide-y divide-gray-200 bg-white">
-                                                  <tr>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">Lindsay Walton</td>
-                                                    @if(auth()->user()->is_admin)
-                                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                    </td>
-                                                    @endif
-                                                  </tr>
-                                    
-                                                  <!-- More people... -->
-                                                </tbody>
-                                              </table>
+                                            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                                <div
+                                                    class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                                                    <table class="min-w-full divide-y divide-gray-300">
+                                                        <thead class="bg-gray-50">
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                                    Name</th>
+                                                                <th scope="col"
+                                                                    class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="divide-y divide-gray-200 bg-white">
+                                                            @if (count($project->phases) == 0)
+                                                            <tr>
+                                                                <td
+                                                                    class="text-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                    No phases in this project</td>
+                                                            </tr>
+                                                            @else
+
+                                                            @foreach ($project->phases as $phase)
+                                                            <tr class="group hover:bg-gray-100">
+                                                                <td
+                                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                    <a href="#">
+                                                                    {{ $phase->name }} <span class="text-gray-500">({{
+                                                                        $phase->is_private ? 'Private' : 'Public'
+                                                                        }})</span>
+                                                                    </a>
+                                                                </td>
+                                                                @if(auth()->user()->is_admin)
+                                                                <td
+                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                                    <a href="{{ route('projects.phases.edit', ['project_id' => $project->id, 'phase_id' => $phase->id]) }}"
+                                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                                </td>
+                                                                @endif
+                                                            </tr>
+                                                            @endforeach
+                                                            @endif
+
+                                                            <!-- More people... -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                          </div>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -124,7 +155,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                                  
                                 @else
                                 @foreach ($project->companies as $company)
                                 <li>

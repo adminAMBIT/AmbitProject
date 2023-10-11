@@ -51,6 +51,9 @@
             </div>
         </div>
 
+        <hr class="my-5 border-t-2 border-gray-300">
+
+
         <!-- REPRESENTANTS SECTION -->
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">
@@ -113,6 +116,9 @@
                 </div>
             </div>
         </div>
+
+        <hr class="my-5 border-t-2 border-gray-300">
+
 
         <!-- CONTACTS SECTION -->
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
