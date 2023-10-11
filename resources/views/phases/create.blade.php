@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $project->title }} - {{ __('Create Phase') }}
+                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - {{ __('Create Phase') }}
             </h2>
         </div>
     </x-slot>

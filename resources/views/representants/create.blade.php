@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $company->name }} - Create Representant
+                <a class="hover:underline" href="{{ route('companies.show', ['id'=>$company->id]) }}">{{ $company->name }}</a> - Create Representant
             </h2>
         </div>
     </x-slot>

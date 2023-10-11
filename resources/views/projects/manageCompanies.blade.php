@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> / Manage Companies
+                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - Manage Companies
             </h2>
         </div>
     </x-slot>

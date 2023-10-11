@@ -86,7 +86,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.show', ['id' => $id]);
     }
 
     /**
