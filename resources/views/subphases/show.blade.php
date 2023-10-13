@@ -2,8 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$phase->project->id]) }}">{{
-                    $phase->project->title }}</a> - {{ $phase->name }}
+                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$subphase->phase->project->id]) }}">{{
+                    $subphase->phase->project->title }}</a>
+                - <a class="hover:underline" href="{{ route('projects.phases.show', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase->id]) }}">{{ $subphase->phase->name }}</a>
+                - {{ $subphase->name }}
             </h2>
         </div>
     </x-slot>
@@ -16,7 +18,7 @@
                         <h2 id="notes-title" class="text-lg font-medium text-gray-900">Subphases</h2>
                         @if(auth()->user()->is_admin)
                         <a type="submit"
-                            href="{{ route('projects.phases.subphases.create', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id]) }}"
+                            href="{{ route('projects.phases.subphases.create', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase->id]) }}"
                             class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Create
                             Subphase</a>
                         @endif
@@ -37,32 +39,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 bg-white">
-                                                @if($phase->subphases->isEmpty())
                                                 <tr>
                                                     <td
                                                         class="text-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                         No subphases in this phase</td>
                                                 </tr>
-                                                @else
-                                                @foreach ($phase->subphases as $subphase)
-                                                <tr class="group hover:bg-gray-100">
-                                                    <td
-                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                        <a class="hover:underline" href="{{ route('projects.phases.subphases.show', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}">
-                                                            {{ $subphase->name }}
-                                                        </a>
-                                                    </td>
-                                                    @if(auth()->user()->is_admin)
-                                                    <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                        <a href="{{ route('projects.phases.subphases.edit', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}"
-                                                            class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                    </td>
-                                                    @endif
-                                                </tr>
-                                                @endforeach
-                                                @endif
-                                                <!-- More people... -->
+                                                
+
                                             </tbody>
                                         </table>
                                     </div>
