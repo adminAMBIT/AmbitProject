@@ -49,19 +49,15 @@
                   </div> -->
                                     <div class="sm:col-span-2">
                                         <dt class="text-sm font-medium text-gray-500">About</dt>
-                                        <dd class="mt-1 text-sm text-gray-900">Fugiat ipsum ipsum deserunt culpa aute
-                                            sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum
-                                            aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-                                            proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit
-                                            deserunt qui eu.</dd>
+                                        <dd class="mt-1 text-sm text-gray-900">{{ $project->description }}</dd>
                                     </div>
                                 </dl>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <a href="#"
                                     class="block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-gray-500 hover:text-gray-700 sm:rounded-b-lg">Read
                                     full application</a>
-                            </div>
+                            </div> -->
                         </div>
                     </section>
 
@@ -138,10 +134,10 @@
                     </section>
                 </div>
 
+                <!-- COMPANIES -->
                 <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
                     <div class="bg-white px-4 py-7 shadow sm:rounded-lg sm:px-6">
-                        <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Companies</h2>
-                        <!-- Activity Feed -->
+                        <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Companies - {{ $project->companies->count() }}</h2>
                         <div class="m-4 flow-root">
                             <ul role="list" class="-mb-8">
                                 @if (count($project->companies) == 0)

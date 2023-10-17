@@ -50,7 +50,7 @@
                 </form>
             </div>
         </div>
-        <form method="POST" action="{{ route('projects.phases.subphases.destroy', ['project_id'=>$project_id, 'phase_id'=>$subphase->phase, 'subphase_parent_id'=>$subphase->id]) }}">
+        <form method="POST" action="{{ route('projects.phases.subphases.destroy', ['project_id'=>$project_id, 'phase_id'=>$subphase->phase, 'subphase_id'=>$subphase->id]) }}">
             @csrf
             @method('DELETE')
             <div class="mt-6 flex items-center">

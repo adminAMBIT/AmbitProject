@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - ASDASD
+                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - <a class="hover:underline" href="{{ route('projects.phases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id]) }}">{{ $phase->name }}</a>
             </h2>
         </div>
     </x-slot>
@@ -12,8 +12,8 @@
             <div class="p-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
-                        <!-- <h1 class="text-base font-semibold leading-6 text-gray-900">Representant</h1>
-                        <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p> -->
+                        <h1 class="text-xl font-semibold leading-6 text-gray-900">{{ $subphase->name }}</h1>
+                        <!-- <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p> -->
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         <a type="button" href="{{ route('projects.phases.subphases.create', ['project_id'=> $project->id, 'phase_id'=>$phase->id]) }}"

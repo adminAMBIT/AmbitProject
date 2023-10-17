@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Projects') }}
+                {{ __('PROJECTS') }}
             </h2>
             @if(Auth::user()->is_admin)
             <a type="button" href="{{ route('projects.create') }}"

@@ -39,7 +39,6 @@ class SubphaseController extends Controller
             $parent_id = session('parent_id');
         }
 
-
         // CREATE SUBPHASE
         $subphase = Subphase::create([
             'name' => $request->name,
@@ -69,7 +68,6 @@ class SubphaseController extends Controller
 
         session(['parent_id' => $subphase_id]);
 
-
         return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase'));
     }
 
@@ -95,10 +93,11 @@ class SubphaseController extends Controller
 
         $subphase->save();
 
-        if ($subphase->parent_id == null) {
+
+        if ($subphase->subphase_parent_id == null) {
             return redirect()->route('projects.phases.show', [$project_id, $phase_id]);
         } else {
-            return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase_id]);
+            return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase->subphase_parent_id]);
         }
     }
 

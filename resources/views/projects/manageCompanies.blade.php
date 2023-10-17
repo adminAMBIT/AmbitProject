@@ -59,7 +59,7 @@
                         @if (count($project->companies) == 0)
                         <tr>
                             <td class="relative py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                <div class="font-medium text-center text-gray-900">No companies in this project.</div>
+                                <div class="font-medium text-center text-gray-900">No companies in this project</div>
                             </td>
                             <td></td>
                         </tr>
@@ -67,7 +67,7 @@
                         @foreach ($project->companies as $company)
                         <tr>
                             <td class="relative py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                <div class="font-medium text-gray-900">{{ $company->name }}</div>
+                                <a class="font-medium text-gray-900 hover:underline" href="{{ route('companies.show', ['id'=>$company->id]) }}">{{ $company->name }}</a>
                             </td>
                             <td class="relative py-3.5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <form method="POST"
