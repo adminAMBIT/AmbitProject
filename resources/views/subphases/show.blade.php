@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$phase->project->id]) }}">{{  $phase->project->title  }}</a> - {{ $phase->name }}
+                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - ASDASD
             </h2>
         </div>
     </x-slot>
@@ -16,7 +16,7 @@
                         <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p> -->
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                        <a type="button" href="{{ route('projects.phases.subphases.create', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id]) }}"
+                        <a type="button" href="{{ route('projects.phases.subphases.create', ['project_id'=> $project->id, 'phase_id'=>$phase->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                             Subphase</a>
                     </div>
@@ -37,14 +37,14 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                        @if($subphases->count() == 0)
+                                        @if($subphaseChildren->count() == 0)
                                         <tr>
                                             <td colspan="3"
                                                 class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 sm:pl-6">
                                                 No subphases found</td>
                                         </tr>
                                         @else
-                                        @foreach($subphases as $subphase)
+                                        @foreach($subphaseChildren as $subphase)
                                         <tr>
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                 <a class="hover:underline" href="{{ route('projects.phases.subphases.show', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}">{{ $subphase->name }}</a></td>

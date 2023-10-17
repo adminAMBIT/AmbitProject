@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Phase;
+use App\Models\Subphase;
 use Illuminate\Http\Request;
 
 class PhaseController extends Controller
@@ -49,9 +50,13 @@ class PhaseController extends Controller
      */
     public function show(string $project_id, string $phase_id)
     {
-        $phase = Phase::findOrFail($phase_id);
+        session()->forget('parent_id');
 
-        return view('phases.show', compact('phase'));
+        $phase = Phase::findOrFail($phase_id);
+        $subphases = Subphase::where('phase_id', $phase_id)
+                   ->where('subphase_parent_id', null)
+                   ->get();
+        return view('phases.show', compact('phase', 'subphases'));
     }
 
     /**

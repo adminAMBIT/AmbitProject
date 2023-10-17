@@ -7,6 +7,7 @@ use App\Http\Controllers\RepresentantController;
 use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PhaseController;
+use App\Http\Controllers\SubphaseController;
 
 
 
@@ -84,5 +85,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/projects/{project_id}/edit-phase/{phase_id}', [PhaseController::class, 'edit'])->name('projects.phases.edit');
     Route::post('/projects/{project_id}/edit-phase/{phase_id}', [PhaseController::class, 'update']);
     Route::delete('/projects/{project_id}/delete-phase/{phase_id}', [PhaseController::class, 'destroy'])->name('projects.phases.destroy');
+
+    // SUBPHASES
+    Route::get('/projects/{project_id}/phases/{phase_id}/create-subphase', [SubphaseController::class, 'create'])->name('projects.phases.subphases.create');
+    Route::post('/projects/{project_id}/phases/{phase_id}/create-subphase', [SubphaseController::class, 'store'])->name('projects.phases.subphases.store');
+    Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}', [SubphaseController::class, 'show'])->name('projects.phases.subphases.show');
+    Route::get('/projects/{project_id}/phases/{phase_id}/edit-subphase/{subphase_id}', [SubphaseController::class, 'edit'])->name('projects.phases.subphases.edit');
+    Route::post('/projects/{project_id}/phases/{phase_id}/edit-subphase/{subphase_id}', [SubphaseController::class, 'update']);
+    Route::delete('/projects/{project_id}/phases/{phase_id}/delete-subphase/{subphase_parent_id}', [SubphaseController::class, 'destroy'])->name('projects.phases.subphases.destroy');
+
     
 });
