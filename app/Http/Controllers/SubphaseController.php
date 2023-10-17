@@ -68,7 +68,9 @@ class SubphaseController extends Controller
 
         session(['parent_id' => $subphase_id]);
 
-        return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase'));
+        $parentSubphases = $subphase->getAllParentSubphases();
+
+        return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases'));
     }
 
     /**

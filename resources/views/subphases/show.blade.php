@@ -2,7 +2,11 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - <a class="hover:underline" href="{{ route('projects.phases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id]) }}">{{ $phase->name }}</a>
+                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - 
+                <a class="hover:underline" href="{{ route('projects.phases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id]) }}">{{ $phase->name }}</a>
+                @foreach($parentSubphases as $parentSubphase)
+                - <a class="hover:underline" href="{{ route('projects.phases.subphases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$parentSubphase['id']]) }}">{{ $parentSubphase['name'] }}</a>
+                @endforeach
             </h2>
         </div>
     </x-slot>

@@ -30,4 +30,21 @@ class Subphase extends Model
     {
         return $this->hasMany(Subphase::class);
     }
+
+    public function getAllParentSubphases()
+    {
+        $parentSubphasesData = collect([]);
+
+        $parentSubphase = $this->subphase_parent;
+
+        while ($parentSubphase) {
+            $parentSubphasesData->push([
+                'id' => $parentSubphase->id,
+                'name' => $parentSubphase->name,
+            ]);
+            $parentSubphase = $parentSubphase->subphase_parent;
+        }
+
+        return $parentSubphasesData->reverse()->values();
+    }
 }
