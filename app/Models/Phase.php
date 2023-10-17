@@ -20,4 +20,9 @@ class Phase extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function subphases()
+    {
+        return $this->hasMany(Subphase::class);
+    }
 }

@@ -24,7 +24,7 @@
                                 <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                                 <div class="mt-2">
                                     <input type="text" name="name" id="name" autocomplete="given-name" required
-                                        value="{{ old('name', $contact->name) }}" value="{{ old('name') }}"
+                                        value="{{ old('name', $contact->name) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     @error('name')
                                     <div class="text-red-600">{{ $message }}</div>
@@ -36,7 +36,7 @@
                                 <label for="nif" class="block text-sm font-medium leading-6 text-gray-900">NIF</label>
                                 <div class="mt-2">
                                     <input type="text" name="nif" id="nif" autocomplete="family-name" required
-                                        value="{{ old('nif', $contact->nif) }}" value="{{ old('nif') }}"
+                                        value="{{ old('nif', $contact->nif) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     @error('nif')
                                     <div class="text-red-600">{{ $message }}</div>
