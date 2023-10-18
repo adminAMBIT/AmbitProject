@@ -2,9 +2,16 @@
 
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $company->name }}
-            </h2>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex items-center">
+                            <a href="{{ route('companies.show', ['id'=>$company->id]) }}"
+                                class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $company->name }}</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
     </x-slot>
 

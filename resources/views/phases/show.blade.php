@@ -1,9 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$phase->project->id]) }}">{{  $phase->project->title  }}</a>
-            </h2>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex items-center">
+                            <a href="{{ route('projects.show', ['id'=>$phase->project->id]) }}"
+                                class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $phase->project->title }}</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
     </x-slot>
 
@@ -12,11 +19,12 @@
             <div class="p-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
-                        <h1 class="text-xl font-semibold leading-6 text-gray-900">{{ $phase->name }}</h1>
+                        <h1 class="ml-4 text-xl font-medium text-gray-500">{{ $phase->name }}</h1>
                         <!-- <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p> -->
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                        <a type="button" href="{{ route('projects.phases.subphases.create', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id]) }}"
+                        <a type="button"
+                            href="{{ route('projects.phases.subphases.create', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                             Subphase</a>
                     </div>
@@ -47,7 +55,10 @@
                                         @foreach($subphases as $subphase)
                                         <tr>
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                <a class="hover:underline" href="{{ route('projects.phases.subphases.show', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}">{{ $subphase->name }}</a></td>
+                                                <a class="hover:underline"
+                                                    href="{{ route('projects.phases.subphases.show', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}">{{
+                                                    $subphase->name }}</a>
+                                            </td>
                                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium">
                                                 <a href="{{ route('projects.phases.subphases.edit', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}"
                                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>

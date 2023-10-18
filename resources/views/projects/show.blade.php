@@ -2,9 +2,17 @@
 
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $project->title }}
-            </h2>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex items-center">
+                            <a href="{{ route('projects.show', ['id'=>$project->id]) }}"
+                                class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $project->title
+                                }}</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
     </x-slot>
     <div class="min-h-full">
@@ -104,10 +112,12 @@
                                                             <tr class="group hover:bg-gray-100">
                                                                 <td
                                                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                                    <a class="hover:underline" href="{{ route('projects.phases.show', ['project_id'=>$project->id,'phase_id'=>$phase->id]) }}">
-                                                                    {{ $phase->name }} <span class="text-gray-500">({{
-                                                                        $phase->is_private ? 'Private' : 'Public'
-                                                                        }})</span>
+                                                                    <a class="hover:underline"
+                                                                        href="{{ route('projects.phases.show', ['project_id'=>$project->id,'phase_id'=>$phase->id]) }}">
+                                                                        {{ $phase->name }} <span
+                                                                            class="text-gray-500">({{
+                                                                            $phase->is_private ? 'Private' : 'Public'
+                                                                            }})</span>
                                                                     </a>
                                                                 </td>
                                                                 @if(auth()->user()->is_admin)
@@ -137,7 +147,8 @@
                 <!-- COMPANIES -->
                 <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
                     <div class="bg-white px-4 py-7 shadow sm:rounded-lg sm:px-6">
-                        <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Companies - {{ $project->companies->count() }}</h2>
+                        <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Companies - {{
+                            $project->companies->count() }}</h2>
                         <div class="m-4 flow-root">
                             <ul role="list" class="-mb-8">
                                 @if (count($project->companies) == 0)

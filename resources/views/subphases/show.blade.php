@@ -1,13 +1,35 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a class="hover:underline" href="{{ route('projects.show', ['id'=>$project->id]) }}">{{ $project->title }}</a> - 
-                <a class="hover:underline" href="{{ route('projects.phases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id]) }}">{{ $phase->name }}</a>
-                @foreach($parentSubphases as $parentSubphase)
-                - <a class="hover:underline" href="{{ route('projects.phases.subphases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$parentSubphase['id']]) }}">{{ $parentSubphase['name'] }}</a>
-                @endforeach
-            </h2>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex items-center">
+                          <a href="{{ route('projects.show', ['id'=>$project->id]) }}" class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $project->title }}</a>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div class="flex items-center">
+                          <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                          </svg>
+                          <a href="{{ route('projects.phases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id]) }}" class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $phase->name }}</a>
+                        </div>
+                      </li>
+                    
+                  @foreach($parentSubphases as $parentSubphase)
+                  <li>
+                    <div class="flex items-center">
+                      <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                      </svg>
+                      <a href="{{ route('projects.phases.subphases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$parentSubphase['id']]) }}" class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $parentSubphase['name'] }}</a>
+                    </div>
+                  </li>
+                  @endforeach
+                </ol>
+              </nav>
         </div>
     </x-slot>
 
@@ -16,7 +38,7 @@
             <div class="p-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
-                        <h1 class="text-xl font-semibold leading-6 text-gray-900">{{ $subphase->name }}</h1>
+                        <h1 class="text-xl font-medium text-gray-500">{{ $subphase->name }}</h1>
                         <!-- <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p> -->
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -67,6 +89,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </x-app-layout>

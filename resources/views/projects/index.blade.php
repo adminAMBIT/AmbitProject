@@ -1,9 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('PROJECTS') }}
-            </h2>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex items-center">
+                            <p class="ml-4 text-xl font-medium text-gray-500">PROJECTS</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
             @if(Auth::user()->is_admin)
             <a type="button" href="{{ route('projects.create') }}"
                 class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
