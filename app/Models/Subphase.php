@@ -47,4 +47,9 @@ class Subphase extends Model
 
         return $parentSubphasesData->reverse()->values();
     }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }

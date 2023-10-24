@@ -20,7 +20,6 @@
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="ml-4 text-xl font-medium text-gray-500">{{ $phase->name }}</h1>
-                        <!-- <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p> -->
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         <a type="button"

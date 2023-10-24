@@ -70,7 +70,13 @@ class SubphaseController extends Controller
 
         $parentSubphases = $subphase->getAllParentSubphases();
 
-        return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases'));
+        if (auth()->user()->is_admin || $phase->is_private == 0) {
+            $documents = $subphase->documents;
+        } else {
+            $documents = $subphase->documents->where('company_id', auth()->user()->company_id)->concat($subphase->documents->where('company_id', null));
+        }
+        
+        return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases', 'documents'));
     }
 
     /**

@@ -39,4 +39,9 @@ class Company extends Model
     {
         return $this->belongsToMany(Project::class, 'project_company', 'company_id', 'project_id');
     }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }
