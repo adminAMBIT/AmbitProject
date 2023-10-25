@@ -179,7 +179,7 @@
                                                 @endif
                                             </td>
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
-                                                <a href="#"
+                                                <a target="_blank" href="{{ route('document.show', ['document_id'=>$document->id]) }}"
                                                     class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
                                                 <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
                                                     class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>

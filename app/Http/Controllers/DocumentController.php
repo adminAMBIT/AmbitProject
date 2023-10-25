@@ -83,9 +83,11 @@ class DocumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function show(string $id)
     {
-        //
+        $document = Document::find($id);
+        $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
+        return '<script>window.open("' . asset($path) . '")</script>';
     }
 
     /**
