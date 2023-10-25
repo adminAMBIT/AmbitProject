@@ -122,7 +122,7 @@
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                     <a href="{{ route('projects.phases.subphases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}" type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
                     <button type="submit" 
-                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Upload</button>
                 </div>
             </form>
 
@@ -185,15 +185,11 @@
                     const fileSize = document.createElement("span");
                     fileSize.className = 'flex-shrink-0 ml-2 text-gray-400';
                     fileSize.textContent = (file.size / 1024 / 1024).toFixed(2) + 'MB';
-                    const downloadLink = document.createElement("a");
-                    downloadLink.className = 'font-medium text-indigo-600 hover:text-indigo-500';
-                    downloadLink.textContent = 'Download';
 
                     // Agregar el archivo a la lista
                     fileDetails.appendChild(fileName);
                     fileDetails.appendChild(fileSize);
                     listItem.appendChild(fileDetails);
-                    listItem.appendChild(downloadLink);
                     fileList.style.display = 'block';
                     fileList.appendChild(listItem);
                 }

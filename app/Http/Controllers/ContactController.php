@@ -69,7 +69,7 @@ class ContactController extends Controller
             'nif' => $request->nif,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => bcrypt('Ambit#2023'),
+            'password' => bcrypt(config('configuration.default_user_password')),
             'user_type_id' => $request->user_type_id,
             'company_id' => $company_id,
         ]);

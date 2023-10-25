@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('name');
-            $table->string('path');
             $table->string('extension');
             $table->integer('size');
             $table->unsignedBigInteger('subphase_id');
@@ -24,6 +23,7 @@ return new class extends Migration
         });
 
         Schema::table('documents', function (Blueprint $table) {
+            
             $table->foreign('subphase_id')->references('id')->on('subphases')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

@@ -49,15 +49,16 @@ class DocumentController extends Controller
         }
 
         foreach($request->file('files') as $file) {
+            $fileId = hexdec(uniqid());
             $fileName = $file->getClientOriginalName();
             $fileExtension = $file->getClientOriginalExtension();
             $fileSize = $file->getSize();
 
-            $file->storeAs('documents', $fileName .'.' . $fileExtension, 'public');
+            $file->storeAs('documents', $fileId. '.' . $fileExtension, 'public');
 
             $document = new Document();
+            $document->id = $fileId;
             $document->name = $fileName;
-            $document->path = $fileName .'.' . $fileExtension;
             $document->extension = $fileExtension;
             $document->size = $fileSize;
             $document->subphase_id = $subphase_id;
@@ -72,9 +73,11 @@ class DocumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function download(string $id)
     {
-        //
+        $document = Document::find($id);
+        $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
+        return response()->download($path, $document->name);
     }
 
     /**
@@ -98,6 +101,6 @@ class DocumentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd(1);
     }
 }

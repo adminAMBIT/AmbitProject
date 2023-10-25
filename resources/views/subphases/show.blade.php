@@ -169,7 +169,7 @@
                                                 {{ $document->name }}
                                             </td>
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
-                                                {{ $document->size }} Mb
+                                                {{ round($document->size / 1048576, 2) }} MB
                                             </td>
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
                                                 @if($document->company_id == null)
@@ -180,10 +180,11 @@
                                             </td>
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
                                                 <a href="#"
-                                                    class="text-green-600 font-bold hover:text-green-800 mr-2">Download</a>
-                                                <a href="#"
-                                                    class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Edit</a>
-                                                <a href="#" class="text-red-600 font-bold hover:text-red-800">Delete</a>
+                                                    class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
+                                                <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
+                                                    class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
+                                                <!-- <a href="#"
+                                                    class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Edit</a> -->
                                             </td>
                                         </tr>
                                         @endforeach
