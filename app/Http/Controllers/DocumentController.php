@@ -87,7 +87,7 @@ class DocumentController extends Controller
     {
         $document = Document::find($id);
         $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
-        return '<script>window.open("' . asset($path) . '")</script>';
+        return response()->file($path);
     }
 
     /**
@@ -103,6 +103,12 @@ class DocumentController extends Controller
      */
     public function destroy(string $id)
     {
-        dd(1);
+        $document = Document::find($id);
+        $document->delete();
+
+        $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
+        File::delete($path);
+
+        return redirect()->back();
     }
 }

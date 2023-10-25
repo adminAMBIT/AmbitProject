@@ -47,6 +47,8 @@ class SubphaseController extends Controller
             'subphase_parent_id' => $parent_id,
         ]);
 
+        session()->flash('success', 'Subphase created successfully');
+
         // REDIRECT
         if ($subphase->subphase_parent_id == null) {
             return redirect()->route('projects.phases.show', [$project_id, $phase_id]);

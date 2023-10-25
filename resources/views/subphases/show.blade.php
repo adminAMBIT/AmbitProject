@@ -56,20 +56,27 @@
         </div>
     </x-slot>
 
+    @if(session('success'))
+    <x-green-alert message="{{ session('success') }}" />
+    @endif
+    
     <!-- SUBPHASES TABLE -->
-    <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
+    @if($subphaseChildren->count() > 0 || auth()->user()->is_admin == 1)
+    <div class="mx-auto max-w-7xl mt-3 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="text-xl font-medium text-gray-500">Subphases</h1>
                     </div>
+                    @if(auth()->user()->is_admin == 1)
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         <a type="button"
                             href="{{ route('projects.phases.subphases.create', ['project_id'=> $project->id, 'phase_id'=>$phase->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                             Subphase</a>
                     </div>
+                    @endif
                 </div>
                 <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -101,10 +108,12 @@
                                                     href="{{ route('projects.phases.subphases.show', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$childSubphase->id]) }}">{{
                                                     $childSubphase->name }}</a>
                                             </td>
+                                            @if(auth()->user()->is_admin == 1)
                                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium">
                                                 <a href="{{ route('projects.phases.subphases.edit', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$childSubphase->id]) }}"
                                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         @endif
@@ -117,6 +126,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <!-- DOCUMENTS TABLE -->
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
@@ -179,12 +189,23 @@
                                                 @endif
                                             </td>
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
-                                                <a target="_blank" href="{{ route('document.show', ['document_id'=>$document->id]) }}"
-                                                    class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
-                                                <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
-                                                    class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
-                                                <!-- <a href="#"
-                                                    class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Edit</a> -->
+                                                <div class="flex justify-center items-center">
+                                                    <a target="_blank"
+                                                        href="{{ route('document.show', ['document_id'=>$document->id]) }}"
+                                                        class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
+                                                    <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
+                                                        class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
+                                                        @if(auth()->user()->is_admin == 1 || auth()->user()->company_id == $document->company_id)
+                                                    <form method="post"
+                                                        action="{{ route('document.destroy', ['document_id'=>$document->id]) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            onclick="return confirm('Are you sure to delete this document?')"
+                                                            class="text-red-600 font-bold hover:text-red-800">Delete</button>
+                                                    </form>
+                                                    @endif
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach

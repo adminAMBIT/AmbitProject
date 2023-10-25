@@ -21,12 +21,14 @@
                     <div class="sm:flex-auto">
                         <h1 class="ml-4 text-xl font-medium text-gray-500">{{ $phase->name }}</h1>
                     </div>
+                    @if(auth()->user()->is_admin == 1)
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         <a type="button"
                             href="{{ route('projects.phases.subphases.create', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                             Subphase</a>
                     </div>
+                    @endif
                 </div>
                 <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -58,10 +60,12 @@
                                                     href="{{ route('projects.phases.subphases.show', ['project_id'=>$phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}">{{
                                                     $subphase->name }}</a>
                                             </td>
+                                            @if(auth()->user()->is_admin == 1)
                                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium">
                                                 <a href="{{ route('projects.phases.subphases.edit', ['project_id'=> $phase->project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}"
                                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         @endif
