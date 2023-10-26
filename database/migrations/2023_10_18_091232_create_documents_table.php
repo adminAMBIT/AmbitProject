@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('extension');
             $table->integer('size');
+            $table->string('status')->default('pending');
             $table->unsignedBigInteger('subphase_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('company_id')->nullable();

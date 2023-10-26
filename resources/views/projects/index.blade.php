@@ -18,6 +18,20 @@
         </div>
     </x-slot>
 
+    <!-- NOTIFICATIONS -->
+    @if(session('created'))
+    <x-green-alert message="{{ session('success') }}" />
+    @endif
+
+    @if(session('updated'))
+    <x-green-alert message="{{ session('updated') }}" />
+    @endif
+
+    @if(session('deleted'))
+    <x-green-alert message="{{ session('deleted') }}" />
+    @endif
+
+    <!-- SHOW PROJECTS -->
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
             @foreach ($projects as $project)

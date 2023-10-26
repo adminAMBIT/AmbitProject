@@ -59,7 +59,7 @@
     @if(session('success'))
     <x-green-alert message="{{ session('success') }}" />
     @endif
-    
+
     <!-- SUBPHASES TABLE -->
     @if($subphaseChildren->count() > 0 || auth()->user()->is_admin == 1)
     <div class="mx-auto max-w-7xl mt-3 px-4 sm:px-6 lg:px-8">
@@ -158,6 +158,9 @@
                                                 Size</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Status</th>
+                                            <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                                 Company</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6">
@@ -181,6 +184,19 @@
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
                                                 {{ round($document->size / 1048576, 2) }} MB
                                             </td>
+                                            @if($document->status == 'pending')
+                                            <td
+                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-gray-500 sm:pl-6">
+                                                @elseif($document->status == 'correct')
+                                            <td
+                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-green-500 sm:pl-6">
+                                                @elseif($document->status == 'incorrect')
+                                            <td
+                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-red-500 sm:pl-6">
+                                                @endif
+                                                {{ strtoupper($document->status) }}
+                                            </td>
+
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
                                                 @if($document->company_id == null)
                                                 Admin
@@ -190,21 +206,10 @@
                                             </td>
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
                                                 <div class="flex justify-center items-center">
-                                                    <a target="_blank"
-                                                        href="{{ route('document.show', ['document_id'=>$document->id]) }}"
-                                                        class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
+                                                    <a href="{{ route('document.show', ['document_id'=>$document->id]) }}"
+                                                        class="text-green-600 font-bold hover:text-green-800 mr-2">Show</a>
                                                     <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
                                                         class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
-                                                        @if(auth()->user()->is_admin == 1 || auth()->user()->company_id == $document->company_id)
-                                                    <form method="post"
-                                                        action="{{ route('document.destroy', ['document_id'=>$document->id]) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            onclick="return confirm('Are you sure to delete this document?')"
-                                                            class="text-red-600 font-bold hover:text-red-800">Delete</button>
-                                                    </form>
-                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>

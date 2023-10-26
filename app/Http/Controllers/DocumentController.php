@@ -15,9 +15,12 @@ class DocumentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function show($id)
     {
-        //
+        $document = Document::find($id);
+        $project = $document->subphase->phase->project;
+
+        return view("documents.show", compact("document", "project"));
     }
 
     /**
@@ -48,9 +51,22 @@ class DocumentController extends Controller
             File::makeDirectory(storage_path('app/public/documents'), $mode = 0777, true, true);
         }
 
+        $project = Project::find($project_id);
+        if (Auth::user()->is_admin) {
+            $companyName = 'Admin';
+        } else {
+            $companyName = Auth::user()->company->name;
+        }
+        $subphase = Subphase::find($subphase_id);
+        $last3Parents = $subphase->getAllParentSubphases()->take(-3);
+        
+        $personalizedName = $project->title . '_' . $companyName . '_' . $last3Parents->implode('name', '_') . '_' . $subphase->name;
+        $personalizedName = str_replace(' ', '_', $personalizedName);
+
+
+
         foreach($request->file('files') as $file) {
             $fileId = hexdec(uniqid());
-            $fileName = $file->getClientOriginalName();
             $fileExtension = $file->getClientOriginalExtension();
             $fileSize = $file->getSize();
 
@@ -58,7 +74,7 @@ class DocumentController extends Controller
 
             $document = new Document();
             $document->id = $fileId;
-            $document->name = $fileName;
+            $document->name = $personalizedName;
             $document->extension = $fileExtension;
             $document->size = $fileSize;
             $document->subphase_id = $subphase_id;
@@ -83,7 +99,7 @@ class DocumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function show(string $id)
+    public function view(string $id)
     {
         $document = Document::find($id);
         $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
@@ -93,9 +109,21 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    public function edit(string $id)
+    {
+        $document = Document::find($id);
+        $project = $document->subphase->phase->project;
+        return view("documents.edit", compact("document", "project"));
+    }
+
     public function update(Request $request, string $id)
     {
-        //
+        $document = Document::find($id);
+        $document->name = $request->name;
+        $document->status = $request->status;
+        $document->save();
+
+        return redirect()->route('document.show', [$document->id]);
     }
 
     /**

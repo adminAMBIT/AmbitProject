@@ -44,9 +44,9 @@ class ProjectController extends Controller
             'description' => $request->description
         ]);
 
+        session()->flash('success', 'Project created successfully');
+
         return redirect()->route('projects.index');
-
-
     }
 
     /**
@@ -86,6 +86,8 @@ class ProjectController extends Controller
 
         $project->save();
 
+        session()->flash('updated','Project updated successfully');
+
         return redirect()->route('projects.show', ['id' => $id]);
     }
 
@@ -97,6 +99,8 @@ class ProjectController extends Controller
         $project = Project::find($id);
 
         $project->delete();
+
+        session()->flash('deleted','Project deleted successfully');
 
         return redirect()->route('projects.index');
     }
