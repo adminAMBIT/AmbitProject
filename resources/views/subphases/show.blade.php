@@ -198,7 +198,7 @@
                                             </td>
                                             @if($document->status == 'pending')
                                             <td
-                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-yellow-400 sm:pl-6">
+                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-yellow-500 sm:pl-6">
                                                 @elseif($document->status == 'correct')
                                             <td
                                                 class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-green-500 sm:pl-6">
