@@ -22,6 +22,14 @@
             </nav>
         </div>
     </x-slot>
+    
+    @if (session('added'))
+    <x-green-alert message="{{ session('added') }}" />
+    @endif
+
+    @if (session('deleted'))
+    <x-green-alert message="{{ session('deleted') }}" />
+    @endif
 
     <div class="mx-auto max-w-7xl m-4 px-4 sm:px-6 lg:px-8">
         <div class="space-y-10 divide-y divide-gray-900/10">

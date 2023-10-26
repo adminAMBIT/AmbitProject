@@ -60,6 +60,18 @@
     <x-green-alert message="{{ session('success') }}" />
     @endif
 
+    @if(session('updated'))
+    <x-green-alert message="{{ session('updated') }}" />
+    @endif
+
+    @if(session('deleted'))
+    <x-green-alert message="{{ session('deleted') }}" />
+    @endif
+
+    @if(session('uploaded'))
+    <x-green-alert message="{{ session('uploaded') }}" />
+    @endif
+
     <!-- SUBPHASES TABLE -->
     @if($subphaseChildren->count() > 0 || auth()->user()->is_admin == 1)
     <div class="mx-auto max-w-7xl mt-3 px-4 sm:px-6 lg:px-8">
@@ -186,7 +198,7 @@
                                             </td>
                                             @if($document->status == 'pending')
                                             <td
-                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-gray-500 sm:pl-6">
+                                                class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-yellow-400 sm:pl-6">
                                                 @elseif($document->status == 'correct')
                                             <td
                                                 class="py-4 pl-4 text-uppercase pr-3 text-sm font-medium text-green-500 sm:pl-6">
@@ -207,9 +219,9 @@
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
                                                 <div class="flex justify-center items-center">
                                                     <a href="{{ route('document.show', ['document_id'=>$document->id]) }}"
-                                                        class="text-green-600 font-bold hover:text-green-800 mr-2">Show</a>
-                                                    <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
-                                                        class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
+                                                        class="text-indigo-600 font-bold hover:text-indigo-800">Show</a>
+                                                    <!-- <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
+                                                        class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a> -->
                                                 </div>
                                             </td>
                                         </tr>

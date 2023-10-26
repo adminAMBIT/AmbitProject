@@ -103,7 +103,8 @@ class SubphaseController extends Controller
 
         $subphase->save();
 
-
+        session()->flash('updated', 'Subphase updated successfully');
+        
         if ($subphase->subphase_parent_id == null) {
             return redirect()->route('projects.phases.show', [$project_id, $phase_id]);
         } else {
@@ -118,6 +119,8 @@ class SubphaseController extends Controller
     {
         $subphase = Subphase::find($subphase_id);
         $subphase_parent_id = $subphase->subphase_parent_id;
+
+        session()->flash('deleted', 'Subphase deleted successfully');
 
         $subphase->delete();
         if ($subphase_parent_id == null) {

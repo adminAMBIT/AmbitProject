@@ -15,6 +15,27 @@
         </div>
     </x-slot>
 
+    <!-- NOTIFICATIONS -->
+    @if (session('updated'))
+    <x-green-alert message="{{ session('updated') }}" />
+    @endif
+
+    @if (session('contactCreated'))
+    <x-green-alert message="{{ session('contactCreated') }}" />
+    @endif
+
+    @if (session('contactDeleted'))
+    <x-green-alert message="{{ session('contactDeleted') }}" />
+    @endif
+
+    @if (session('representantCreated'))
+    <x-green-alert message="{{ session('representantCreated') }}" />
+    @endif
+
+    @if (session('representantDeleted'))
+    <x-green-alert message="{{ session('representantDeleted') }}" />
+    @endif
+
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <!-- GENERAL INFORMATION -->
         <div class="overflow-hidden bg-white shadow sm:rounded-lg">

@@ -71,6 +71,8 @@ class CompanyController extends Controller
             'postal_code' => $request->postal_code,
         ]);
 
+        session()->flash('created', 'Company created successfully');
+
         return redirect()->route('companies.index');
     }
 
@@ -141,8 +143,10 @@ class CompanyController extends Controller
         $company->postal_code = $request->postal_code;
 
         $company->save();
+        
+        session()->flash('updated', 'Company updated successfully');
 
-        return redirect()->route('companies.index');
+        return redirect()->route('companies.show', [$company->id]);
     }
 
     /**

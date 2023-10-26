@@ -41,6 +41,8 @@ class PhaseController extends Controller
             'project_id' => $project_id,
         ]);
 
+        session()->flash('created', 'Phase created successfully');
+
         return redirect()->route('projects.show', $project_id);
 
     }
@@ -81,6 +83,8 @@ class PhaseController extends Controller
         $phase->is_private = (int)$request->is_private;
 
         $phase->save();
+
+        session()->flash('phaseUpdated', 'Phase updated successfully');
     
 
         return redirect()->route('projects.show', $phase->project_id);
@@ -94,6 +98,8 @@ class PhaseController extends Controller
         $phase = Phase::findOrFail($phase_id);
 
         $phase->delete();
+
+        session()->flash('deleted', 'Phase deleted successfully');
 
         return redirect()->route('projects.show', $phase->project_id);
     }

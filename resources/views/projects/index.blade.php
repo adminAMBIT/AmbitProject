@@ -20,11 +20,7 @@
 
     <!-- NOTIFICATIONS -->
     @if(session('created'))
-    <x-green-alert message="{{ session('success') }}" />
-    @endif
-
-    @if(session('updated'))
-    <x-green-alert message="{{ session('updated') }}" />
+    <x-green-alert message="{{ session('created') }}" />
     @endif
 
     @if(session('deleted'))

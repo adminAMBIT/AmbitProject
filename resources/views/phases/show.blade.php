@@ -14,6 +14,18 @@
         </div>
     </x-slot>
 
+    @if (session('success'))
+    <x-green-alert message="{{ session('success') }}" />
+    @endif
+    
+    @if (session('updated'))
+    <x-green-alert message="{{ session('updated') }}" />
+    @endif
+
+    @if (session('deleted'))
+    <x-green-alert message="{{ session('deleted') }}" />
+    @endif
+
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">

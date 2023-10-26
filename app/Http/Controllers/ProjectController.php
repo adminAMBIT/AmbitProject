@@ -44,7 +44,7 @@ class ProjectController extends Controller
             'description' => $request->description
         ]);
 
-        session()->flash('success', 'Project created successfully');
+        session()->flash('created', 'Project created successfully');
 
         return redirect()->route('projects.index');
     }
@@ -129,6 +129,8 @@ class ProjectController extends Controller
 
         $project->companies()->syncWithoutDetaching($request->company_id);
 
+        session()->flash('added', 'Company added successfully');
+
         return redirect()->route('projects.manageCompanies.index', ['project_id' => $project_id]);
     }
 
@@ -140,6 +142,8 @@ class ProjectController extends Controller
         $project = Project::find($project_id);
 
         $project->companies()->detach($company_id);
+
+        session()->flash('deleted', 'Company removed successfully');
 
         return redirect()->route('projects.manageCompanies.index', ['project_id' => $project_id]);
     }

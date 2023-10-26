@@ -67,6 +67,8 @@ class RepresentantController extends Controller
             'company_id' => $company_id,
         ]);
 
+        session()->flash('representantCreated', 'Representant created successfully');
+
         return redirect()->route('companies.show', ['id' => $company_id]);
     }
 
@@ -126,6 +128,8 @@ class RepresentantController extends Controller
 
         $representant->save();
 
+        session()->flash('representantUpdated', 'Representant updated successfully');
+
         return redirect()->route('representants.show', ['id' => $id]);
     }
 
@@ -137,6 +141,8 @@ class RepresentantController extends Controller
         $representant = User::find($id);
 
         $representant->delete();
+
+        session()->flash('representantDeleted', 'Representant deleted successfully');
 
         return redirect()->route('companies.show', ['id' => $representant->company_id]);
     }

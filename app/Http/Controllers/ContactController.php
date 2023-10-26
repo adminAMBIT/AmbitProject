@@ -74,6 +74,8 @@ class ContactController extends Controller
             'company_id' => $company_id,
         ]);
 
+        session()->flash('contactCreated', 'Contact created successfully');
+
         return redirect()->route('companies.show', ['id' => $company_id]);
     }
 
@@ -141,6 +143,8 @@ class ContactController extends Controller
 
         $contact->save();
 
+        session()->flash('contactUpdated', 'Contact updated successfully');
+
         return redirect()->route('contacts.show', ['id' => $id]);
     }
 
@@ -152,6 +156,8 @@ class ContactController extends Controller
         $contact = User::find($id);
 
         $contact->delete();
+
+        session()->flash('contactDeleted', 'Contact deleted successfully');
 
         return redirect()->route('companies.show', ['id' => $contact->company_id]);
     }

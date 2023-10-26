@@ -24,6 +24,10 @@
         </div>
     </x-slot>
 
+    @if(session('contactUpdated'))
+    <x-green-alert message="{{ session('contactUpdated') }}" />
+    @endif
+
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <!-- GENERAL INFORMATION -->
         <div class="overflow-hidden bg-white shadow sm:rounded-lg">

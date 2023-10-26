@@ -82,6 +82,8 @@ class DocumentController extends Controller
             $document->company_id = Auth::user()->company_id;
             $document->save();
         }
+
+        session()->flash('uploaded', 'Documents uploaded successfully');
         
         return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase_id]);
     }
@@ -122,6 +124,8 @@ class DocumentController extends Controller
         $document->name = $request->name;
         $document->status = $request->status;
         $document->save();
+
+        session()->flash('updated', 'Document updated successfully');
 
         return redirect()->route('document.show', [$document->id]);
     }

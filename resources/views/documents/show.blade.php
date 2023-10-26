@@ -41,6 +41,10 @@
         </div>
     </x-slot>
 
+    @if (session('updated'))
+    <x-green-alert message="{{ session('updated') }}" />
+    @endif
+
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden bg-white shadow sm:rounded-lg">
             <div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -96,7 +100,7 @@
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-900">Status</dt>
                         @if($document->status == 'pending')
-                        <dd class="mt-1 text-sm font-bold leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        <dd class="mt-1 text-sm font-bold leading-6 text-yellow-400 sm:col-span-2 sm:mt-0">
                             @elseif($document->status == 'correct')
                         <dd class="mt-1 text-sm font-bold leading-6 text-green-500 sm:col-span-2 sm:mt-0">
                             @elseif($document->status == 'incorrect')
