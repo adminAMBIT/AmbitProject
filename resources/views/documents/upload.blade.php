@@ -148,13 +148,16 @@
 
             function handleFileDrop(event) {
                 event.preventDefault();
+                const files = event.dataTransfer.files;
+
+                const fileInput = document.getElementById("file-upload");
+                fileInput.files = files;
 
                 // Quitar los estilos de resaltado cuando se suelta un archivo
                 document.getElementById('drop-zone').classList.remove('border-indigo-500');
                 document.getElementById('drop-zone').classList.remove('border-3');
 
 
-                const files = event.dataTransfer.files;
                 handleFiles(files);
             }
 
@@ -173,6 +176,7 @@
                     console.log(file);
                     console.log("Nombre del archivo: " + file.name);
                     console.log("Tamaño del archivo: " + file.size + " bytes");
+                    console.log(fileInput.files.length);
 
                     // Crear un elemento de lista para cada archivo
                     const listItem = document.createElement("li");
