@@ -12,6 +12,7 @@ class Document extends Model
     protected $fillable = [
         'id',
         'name',
+        'downloadPath',
         'extension',
         'size',
         'subphase_id',
@@ -32,5 +33,10 @@ class Document extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class);
     }
 }

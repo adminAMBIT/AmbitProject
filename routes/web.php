@@ -9,9 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\SubphaseController;
 use App\Http\Controllers\DocumentController;
-
-
-
+use App\Http\Controllers\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +102,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::delete('/projects/{project_id}/phases/{phase_id}/delete-subphase/{subphase_id}', [SubphaseController::class, 'destroy'])->name('projects.phases.subphases.destroy');
 
     // DOCUMENTS
-    Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/upload-documents', [DocumentController::class, 'upload'])->name('projects.phases.subphases.document.upload');
+    Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/upload-documents', [DocumentController::class, 'create'])->name('projects.phases.subphases.document.create');
     Route::post('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/upload-documents', [DocumentController::class, 'store'])->name('projects.phases.subphases.document.store');
     Route::get('/documents/{document_id}', [DocumentController::class, 'show'])->name('document.show');
     Route::get('/download-document/{document_id}', [DocumentController::class, 'download'])->name('document.download');
@@ -112,5 +110,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/edit-document/{document_id}', [DocumentController::class, 'edit'])->name('document.edit');
     Route::post('/edit-document/{document_id}', [DocumentController::class, 'update'])->name('document.update');
     Route::delete('/delete-document/{document_id}', [DocumentController::class, 'destroy'])->name('document.destroy');
+
+    // FEEDBACK
+    Route::get('/documents/{document_id}/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
+    Route::get('/documents/{document_id}/feedbacks/create', [FeedbackController::class, 'create'])->name('feedbacks.create');
+    Route::post('/documents/{document_id}/feedbacks/create', [FeedbackController::class, 'store'])->name('feedbacks.store');
 
 });

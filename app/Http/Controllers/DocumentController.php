@@ -18,15 +18,16 @@ class DocumentController extends Controller
     public function show($id)
     {
         $document = Document::find($id);
+        $feedbacks = $document->feedbacks;
         $project = $document->subphase->phase->project;
 
-        return view("documents.show", compact("document", "project"));
+        return view("documents.show", compact("document", "project", "feedbacks"));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function upload(string $project_id, string $phase_id, string $subphase_id)
+    public function create(string $project_id, string $phase_id, string $subphase_id)
     {
         $project = Project::find($project_id);
         $phase = Phase::find($phase_id);
@@ -35,7 +36,7 @@ class DocumentController extends Controller
         $parentSubphases = $subphase->getAllParentSubphases();
 
 
-        return view("documents.upload", compact("project","phase","subphase", "parentSubphases"));
+        return view("documents.upload", compact("project", "phase", "subphase", "parentSubphases"));
     }
 
     /**
@@ -45,36 +46,40 @@ class DocumentController extends Controller
     {
         $request->validate([
             'files.*' => 'required|max:2048'
-        ]); 
+        ]);
 
-        if(!File::exists(storage_path('app/public/documents'))) {
-            File::makeDirectory(storage_path('app/public/documents'), $mode = 0777, true, true);
+        // VARIABLES
+        $subphase = Subphase::find($subphase_id);
+        $last2Parents = $subphase->getAllParentSubphases()->take(-2);
+        $project = Project::find($project_id);
+
+        // MAKE DIRECTORIES
+        if (!File::exists(storage_path('app/public/documents/' . $project->title))) {
+            File::makeDirectory(storage_path('app/public/documents/' . $project->title), $mode = 0777, true, true);
         }
 
-        $project = Project::find($project_id);
+        // SET COMPANY NAME
         if (Auth::user()->is_admin) {
             $companyName = 'Admin';
         } else {
             $companyName = Auth::user()->company->name;
         }
-        $subphase = Subphase::find($subphase_id);
-        $last3Parents = $subphase->getAllParentSubphases()->take(-3);
-        
-        $personalizedName = $project->title . '_' . $companyName . '_' . $last3Parents->implode('name', '_') . '_' . $subphase->name;
-        $personalizedName = str_replace(' ', '_', $personalizedName);
 
+        // SET PERSONALIZED NAME
+        $downloadPathName = $project->title . '_' . $companyName . '_' . $last2Parents->implode('name', '_') . '_' . $subphase->name;
+        $downloadPathName = str_replace(' ', '_', $downloadPathName);
 
-
-        foreach($request->file('files') as $file) {
+        foreach ($request->file('files') as $file) {
             $fileId = hexdec(uniqid());
             $fileExtension = $file->getClientOriginalExtension();
             $fileSize = $file->getSize();
 
-            $file->storeAs('documents', $fileId. '.' . $fileExtension, 'public');
+            $file->storeAs('documents/' . $project->title, $fileId . '.' . $fileExtension, 'public');
 
             $document = new Document();
             $document->id = $fileId;
-            $document->name = $personalizedName;
+            $document->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $document->downloadPath = $downloadPathName;
             $document->extension = $fileExtension;
             $document->size = $fileSize;
             $document->subphase_id = $subphase_id;
@@ -84,7 +89,7 @@ class DocumentController extends Controller
         }
 
         session()->flash('uploaded', 'Documents uploaded successfully');
-        
+
         return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase_id]);
     }
 
@@ -94,8 +99,9 @@ class DocumentController extends Controller
     public function download(string $id)
     {
         $document = Document::find($id);
-        $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
-        return response()->download($path, $document->name);
+        $project = $document->subphase->phase->project;
+        $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
+        return response()->download($path, $document->downloadPath . '.' . $document->name . '.' . $document->extension);
     }
 
     /**
@@ -104,7 +110,8 @@ class DocumentController extends Controller
     public function view(string $id)
     {
         $document = Document::find($id);
-        $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
+        $project = $document->subphase->phase->project;
+        $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
         return response()->file($path);
     }
 
@@ -121,8 +128,27 @@ class DocumentController extends Controller
     public function update(Request $request, string $id)
     {
         $document = Document::find($id);
-        $document->name = $request->name;
-        $document->status = $request->status;
+        if ($request->hasFile("file")) {
+            $project = $document->subphase->phase->project;
+            $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
+            File::delete($path);
+
+            $request->validate([
+                'file' => 'max:2048'
+            ]);
+
+            $request->file->storeAs('documents/' . $project->title, $document->id . '.' . $document->extension, 'public');
+
+            $document->name = pathinfo($request->file->getClientOriginalName(), PATHINFO_FILENAME);
+            $document->extension = $request->file->getClientOriginalExtension();
+            $document->size = $request->file->getSize();
+            $document->status = "pending";
+
+        } else {
+            $document->name = $request->name;
+            $document->status = $request->status;
+        }
+        
         $document->save();
 
         session()->flash('updated', 'Document updated successfully');
@@ -136,11 +162,13 @@ class DocumentController extends Controller
     public function destroy(string $id)
     {
         $document = Document::find($id);
-        $document->delete();
+        $project = $document->subphase->phase->project;
 
-        $path = storage_path('app/public/documents/' . $document->id . '.' . $document->extension);
+        $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
+
+        $document->delete();
         File::delete($path);
 
-        return redirect()->back();
+        return redirect()->route('projects.phases.subphases.show', [$project->id, $document->subphase->phase->id, $document->subphase->id]);
     }
 }

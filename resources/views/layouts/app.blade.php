@@ -16,6 +16,15 @@
 
         <!-- Styles -->
         @livewireStyles
+        <style>
+            .truncate-text {
+                max-width: 40rem;
+                /* Ajusta el ancho máximo según tus necesidades */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <x-banner />

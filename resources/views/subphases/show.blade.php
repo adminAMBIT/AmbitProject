@@ -150,7 +150,7 @@
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         <a type="button"
-                            href="{{ route('projects.phases.subphases.document.upload', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase, 'subphase_id'=>$subphase->id]) }}"
+                            href="{{ route('projects.phases.subphases.document.create', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase, 'subphase_id'=>$subphase->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Upload
                             Documents</a>
                     </div>
@@ -190,8 +190,8 @@
                                         @else
                                         @foreach($documents as $document)
                                         <tr>
-                                            <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {{ $document->name }}
+                                            <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
+                                                {{ $document->name }}.{{ $document->extension }}
                                             </td>
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
                                                 {{ round($document->size / 1048576, 2) }} MB
@@ -220,8 +220,6 @@
                                                 <div class="flex justify-center items-center">
                                                     <a href="{{ route('document.show', ['document_id'=>$document->id]) }}"
                                                         class="text-indigo-600 font-bold hover:text-indigo-800">Show</a>
-                                                    <!-- <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
-                                                        class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a> -->
                                                 </div>
                                             </td>
                                         </tr>

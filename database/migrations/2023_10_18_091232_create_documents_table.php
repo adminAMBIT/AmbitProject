@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('downloadPath');
             $table->string('extension');
             $table->integer('size');
             $table->string('status')->default('pending');
