@@ -40,6 +40,10 @@ class FeedbackController extends Controller
             'description' => $request->description,
         ]);
 
+        $document = Document::find($document_id);
+        $document->status = 'incorrect';
+        $document->save();
+
         session()->flash('created', 'Feedback created successfully!');
 
         return redirect()->route('document.show', $document_id);
@@ -56,17 +60,26 @@ class FeedbackController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $document_id, string $feedback_id)
     {
-        //
+        $feedback = Feedback::find($feedback_id);
+
+        return view('feedbacks.edit', compact('feedback'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $document_id, string $feedback_id)
     {
-        //
+        $feedback = Feedback::find($feedback_id);
+        $feedback->description = $request->description;
+
+        $feedback->save();
+
+        session()->flash('updated', 'Feedback updated successfully!');
+
+        return redirect()->route('feedbacks.index', $document_id);
     }
 
     /**
@@ -74,6 +87,12 @@ class FeedbackController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $feedback = Feedback::find($id);
+
+        $feedback->delete();
+
+        session()->flash('deleted', 'Feedback deleted successfully!');
+
+        return redirect()->back();
     }
 }

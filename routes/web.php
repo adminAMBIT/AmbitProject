@@ -115,5 +115,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/documents/{document_id}/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
     Route::get('/documents/{document_id}/feedbacks/create', [FeedbackController::class, 'create'])->name('feedbacks.create');
     Route::post('/documents/{document_id}/feedbacks/create', [FeedbackController::class, 'store'])->name('feedbacks.store');
+    Route::get('/documents/{document_id}/feedbacks/{feedback_id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
+    Route::post('/documents/{document_id}/feedbacks/{feedback_id}/edit', [FeedbackController::class, 'update'])->name('feedbacks.update');
+    Route::delete('/feedbacks/{feedback_id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
 
 });

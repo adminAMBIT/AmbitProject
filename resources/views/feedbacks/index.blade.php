@@ -19,6 +19,14 @@
     <x-green-alert message="{{ session('created') }}" />
     @endif
 
+    @if(session('updated'))
+    <x-green-alert message="{{ session('updated') }}" />
+    @endif
+
+    @if(session('deleted'))
+    <x-green-alert message="{{ session('deleted') }}" />
+    @endif
+
     <div class="mx-auto max-w-7xl mt-3 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">
@@ -64,11 +72,18 @@
                                                 class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 truncate-text">
                                                 <a class="hover:underline" href="#">{{ $feedback->description }}</a>
                                             </td>
-                                            <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
-                                                <a href="{{ route('document.show', ['document_id'=>$document->id]) }}"
-                                                    class="text-indigo-600 font-bold hover:text-indigo-800">Edit</a>
-                                                <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
-                                                    class="text-red-600 font-bold hover:text-red-800">Delete</a>
+                                            <td class="py-4 pl-3 pr-4 text-center items-center text-sm font-medium" style="display: flex; align-items: center; justify-content: center;">
+                                                <a href="{{ route('feedbacks.edit', ['document_id'=>$feedback->document->id ,'feedback_id'=>$feedback->id]) }}"
+                                                    class="mr-2 text-indigo-600 font-bold hover:text-indigo-800">Edit</a>
+                                                <form method="POST"
+                                                    action="{{ route('feedbacks.destroy', ['feedback_id' => $feedback->id]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        onclick="return confirm('Are you sure to delete this feedback?')"
+                                                        class="text-red-600 font-bold hover:text-red-800"
+                                                        style="border: none; background: none; cursor: pointer;">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -6,6 +6,24 @@
             </h2>
         </div>
     </x-slot>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex items-center">
+                            <a href="{{ route('projects.show', ['id'=>$phase->project->id]) }}"
+                                class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $phase->project->title
+                                }} - Edit</a>
+                        </div>
+                    </li>
+
+
+
+                </ol>
+            </nav>
+        </div>
+    </x-slot>
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
 
         <div class="space-y-10 divide-y divide-gray-900/10">

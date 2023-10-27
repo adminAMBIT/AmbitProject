@@ -98,7 +98,7 @@
                             <form method="POST" action="{{ route('document.destroy', ['document_id' => $document->id]) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-600 font-bold hover:text-red-800" style="border: none; background: none; cursor: pointer;">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure to delete this document?')" class="text-red-600 font-bold hover:text-red-800" style="border: none; background: none; cursor: pointer;">Delete</button>
                             </form>
                             @endif
                         </dd>
@@ -116,8 +116,13 @@
                         </dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-900">Uploaded at</dt>
+                        <dt class="text-sm font-medium text-gray-900">Created at</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $document->created_at
+                            }}</dd>
+                    </div>
+                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-900">Updated at</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $document->updated_at
                             }}</dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -164,7 +169,7 @@
                                                                 $feedback->description }}</p>
                                                         </div>
                                                         <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                                            <time datetime="2020-09-20">Sep 20</time>
+                                                            <time datetime="2020-09-20">{{ $feedback->getMonthAndDay() }}</time>
                                                         </div>
                                                     </div>
                                                 </div>

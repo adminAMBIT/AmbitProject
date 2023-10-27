@@ -6,9 +6,11 @@
                 <ol role="list" class="flex items-center space-x-4">
                     <li>
                         <div class="flex items-center">
-                            <p class=" text-xl font-medium text-gray-700"><a href="{{ route('document.show', ['document_id'=>$document->id]) }}"
-                                class="text-xl font-medium text-gray-500 hover:text-gray-700">{{
-                                $document->name }}.{{ $document->extension }}</a> - Create Feedback</p>
+                            <p class=" text-xl font-medium text-gray-700"><a
+                                    href="{{ route('document.show', ['document_id'=>$feedback->document->id]) }}"
+                                    class="text-xl font-medium text-gray-500 hover:text-gray-700">{{
+                                    $feedback->document->name }}.{{ $feedback->document->extension }}</a> - Edit
+                                Feedback</p>
                         </div>
                     </li>
                 </ol>
@@ -30,9 +32,9 @@
                             <div class="col-span-full">
                                 <label for="description"
                                     class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-                                    <textarea id="description" name="description" rows="3" required
-                                        placeholder="Enter feedback description here"
-                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                <textarea id="description" name="description" rows="3" required
+                                    placeholder="Enter feedback description here"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $feedback->description }}</textarea>
                                 <!-- <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about the project. -->
                                 </p>
                             </div>

@@ -20,4 +20,9 @@ class Feedback extends Model
     {
         return $this->belongsTo(Document::class);
     }
+
+    public function getMonthAndDay()
+    {
+        return $this->created_at->format('M d');
+    }
 }

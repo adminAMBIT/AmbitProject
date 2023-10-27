@@ -169,6 +169,8 @@ class DocumentController extends Controller
         $document->delete();
         File::delete($path);
 
+        session()->flash('documentDeleted','Document deleted successfully');
+
         return redirect()->route('projects.phases.subphases.show', [$project->id, $document->subphase->phase->id, $document->subphase->id]);
     }
 }

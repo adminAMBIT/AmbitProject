@@ -72,6 +72,10 @@
     <x-green-alert message="{{ session('uploaded') }}" />
     @endif
 
+    @if(session('documentDeleted'))
+    <x-green-alert message="{{ session('documentDeleted') }}" />
+    @endif
+
     <!-- SUBPHASES TABLE -->
     @if($subphaseChildren->count() > 0 || auth()->user()->is_admin == 1)
     <div class="mx-auto max-w-7xl mt-3 px-4 sm:px-6 lg:px-8">
