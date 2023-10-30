@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Company;
+use Illuminate\Support\Facades\DB;
 
 
 class ProjectController extends Controller
@@ -71,7 +72,7 @@ class ProjectController extends Controller
         return view('projects.edit', [
             'project' => $project
         ]);
-        
+
     }
 
     /**
@@ -86,7 +87,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        session()->flash('updated','Project updated successfully');
+        session()->flash('updated', 'Project updated successfully');
 
         return redirect()->route('projects.show', ['id' => $id]);
     }
@@ -100,7 +101,7 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        session()->flash('deleted','Project deleted successfully');
+        session()->flash('deleted', 'Project deleted successfully');
 
         return redirect()->route('projects.index');
     }
@@ -143,8 +144,49 @@ class ProjectController extends Controller
 
         $project->companies()->detach($company_id);
 
+        $project->users()->where('company_id', $company_id)->detach();
+
         session()->flash('deleted', 'Company removed successfully');
 
         return redirect()->route('projects.manageCompanies.index', ['project_id' => $project_id]);
     }
+
+    public function manageUsers(string $project_id, string $company_id)
+    {
+        $company = Company::find($company_id);
+        $project = Project::find($project_id);
+        $assignedUsers = $project->users->where('company_id', $company_id);
+
+        // dd($assignedUsers);
+
+        return view('projects.showUsers', [
+            'company' => $company,
+            'project' => $project,
+            'assignedUsers' => $assignedUsers
+        ]);
+    }
+
+    public function manageUsersStore(Request $request, string $project_id)
+    {
+        $project = Project::find($project_id);
+
+        $project->users()->syncWithoutDetaching($request->user_id);
+
+        session()->flash('added', 'User added successfully');
+
+        return redirect()->route('projects.companies.manageUsers.index', ['project_id' => $project_id, 'company_id' => $request->company_id]);
+    }
+
+    public function manageUsersDestroy(string $project_id, string $company_id, string $user_id)
+    {
+        $project = Project::find($project_id);
+
+        $project->users()->detach($user_id);
+
+        session()->flash('deleted', 'User removed successfully');
+
+        return redirect()->route('projects.companies.manageUsers.index', ['project_id' => $project_id, 'company_id' => $company_id]);
+    }
+
+
 }

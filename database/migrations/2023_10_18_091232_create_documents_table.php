@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->unsignedBigInteger('subphase_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->foreign('subphase_id')->references('id')->on('subphases')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

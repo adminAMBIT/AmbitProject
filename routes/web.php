@@ -40,6 +40,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/projects/{id}/edit', [ProjectController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
+    Route::get('/project/{project_id}/company/{company_id}/manageUsers', [ProjectController::class,'manageUsers'])->name('projects.companies.manageUsers.index');
+    Route::post('/project/{project_id}/company/{company_id}/manageUsers', [ProjectController::class,'manageUsersStore'])->name('projects.companies.manageUsers.store');
+    Route::delete('/project/{project_id}/company/{company_id}/manageUsers/{user_id}', [ProjectController::class,'manageUsersDestroy'])->name('projects.companies.manageUsers.destroy');
+
+
     // COMPANIES
     Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
     Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
@@ -48,6 +53,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/companies/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
     Route::post('/companies/{id}/edit', [CompanyController::class, 'update']);
     Route::delete('/companies/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+    // FER EL POST DE MANAGE USERS
+    Route::get('/projects/{project_id}/company/{company_id}/documents', [CompanyController::class,'showDocuments'])->name('projects.companies.documents.index');
 
     // REPRESENTANTS
     Route::get('/companies/{company_id}/create-respresentant', [RepresentantController::class, 'create'])->name('representants.create');
@@ -110,6 +117,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/edit-document/{document_id}', [DocumentController::class, 'edit'])->name('document.edit');
     Route::post('/edit-document/{document_id}', [DocumentController::class, 'update'])->name('document.update');
     Route::delete('/delete-document/{document_id}', [DocumentController::class, 'destroy'])->name('document.destroy');
+    Route::get('/project/{project_id}/company/{company_id}/downloadAll', [DocumentController::class,'downloadAll'])->name('projects.companies.documents.downloadAll');
 
     // FEEDBACK
     Route::get('/documents/{document_id}/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');

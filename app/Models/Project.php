@@ -21,4 +21,14 @@ class Project extends Model
         return $this->hasMany(Phase::class);
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'project_user', 'project_id', 'user_id');
+    }
+
 }

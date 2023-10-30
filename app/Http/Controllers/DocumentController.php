@@ -8,6 +8,8 @@ use App\Models\Project;
 use App\Models\Phase;
 use App\Models\Subphase;
 use App\Models\Document;
+use App\Models\Company;
+use ZipArchive;
 use Illuminate\Support\Facades\File;
 
 class DocumentController extends Controller
@@ -85,6 +87,7 @@ class DocumentController extends Controller
             $document->subphase_id = $subphase_id;
             $document->user_id = Auth::user()->id;
             $document->company_id = Auth::user()->company_id;
+            $document->project_id = $project_id;
             $document->save();
         }
 
@@ -148,7 +151,7 @@ class DocumentController extends Controller
             $document->name = $request->name;
             $document->status = $request->status;
         }
-        
+
         $document->save();
 
         session()->flash('updated', 'Document updated successfully');
@@ -169,8 +172,27 @@ class DocumentController extends Controller
         $document->delete();
         File::delete($path);
 
-        session()->flash('documentDeleted','Document deleted successfully');
+        session()->flash('documentDeleted', 'Document deleted successfully');
 
         return redirect()->route('projects.phases.subphases.show', [$project->id, $document->subphase->phase->id, $document->subphase->id]);
+    }
+
+    public function downloadAll(string $project_id, string $company_id)
+    {
+        $project = Project::find($project_id);
+        $company = Company::find($company_id);
+
+        $zip = new ZipArchive;
+        $fileName = $project->title . '_' . $company->name . '.zip';
+        $zip->open(storage_path('app/public/documents/' . $fileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($company->documents as $document) {
+            $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
+            $zip->addFile($path, $document->downloadPath . '.' . $document->name . '.' . $document->extension);
+        }
+
+        $zip->close();
+
+        return response()->download(storage_path('app/public/documents/' . $fileName))->deleteFileAfterSend(true);
     }
 }

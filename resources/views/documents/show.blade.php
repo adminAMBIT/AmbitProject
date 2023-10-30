@@ -10,7 +10,7 @@
                                 }}</a>
                         </div>
                     </li>
-
+                    @if(isset($document->subphase->subphase_parent->name))
                     <li>
                         <div class="flex items-center">
                             <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
@@ -24,6 +24,7 @@
                                 $document->subphase->subphase_parent->name }}</a>
                         </div>
                     </li>
+                    @endif
 
                     <li>
                         <div class="flex items-center">

@@ -158,8 +158,9 @@
                 </section>
             </div>
 
-            <!-- COMPANIES -->
+            <!-- ASIDE -->
             <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
+                <!-- COMPANIES -->
                 <div class="bg-white px-4 py-7 shadow sm:rounded-lg sm:px-6">
                     <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Companies - {{
                         $project->companies->count() }}</h2>
@@ -203,7 +204,7 @@
                         </ul>
                     </div>
                     @if(auth()->user()->is_admin)
-                    <div class="mt-6 mb-3 flex flex-col justify-stretch">
+                    <div class="mt-7 mb-3 flex flex-col justify-stretch">
                         <a href="{{ route('projects.manageCompanies.index', ['project_id' => $project->id]) }}"
                             type="button"
                             class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Manage
@@ -212,6 +213,7 @@
                     @endif
                 </div>
             </section>
+            
         </div>
     </div>
 

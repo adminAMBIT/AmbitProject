@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Project;
+use App\Models\Document;
 use App\Models\UserType;
 use Illuminate\Support\Facades\Validator;
 
@@ -159,5 +161,13 @@ class CompanyController extends Controller
         $company->delete();
 
         return redirect()->route('companies.index');
+    }
+
+    public function showDocuments(string $project_id, string $company_id)
+    {
+        $project = Project::find($project_id);
+        $company = Company::find($company_id);
+        $documents = Document::where('company_id', $company_id)->where('project_id', $project_id)->get();
+        return view('companies.showDocuments', compact('company', 'documents', 'project'));
     }
 }
