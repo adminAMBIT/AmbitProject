@@ -31,11 +31,11 @@
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="col-span-full">
                                 <label for="description"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                                    class="block text-sm font-medium leading-6 text-gray-900">Description *</label>
                                 <textarea id="description" name="description" rows="3" required
                                     placeholder="Enter feedback description here"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $feedback->description }}</textarea>
-                                <!-- <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about the project. -->
+                                    <p class="mt-3 text-sm leading-6 text-gray-600">(*) Required fields</p>
                                 </p>
                             </div>
                         </div>

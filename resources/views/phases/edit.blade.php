@@ -41,7 +41,7 @@
                     <div class="px-4 py-6 sm:p-8">
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6">
                             <div class="sm:col-span-3">
-                                <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                                <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name *</label>
                                 <div class="mt-1">
                                     <input type="text" name="name" id="name" autocomplete="given-name" value="{{ $phase->name }}" required
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -61,7 +61,7 @@
                         </div>
 
                         <fieldset class="mt-6">
-                            <legend class="text-sm font-semibold leading-6 text-gray-900">Phase Visibility
+                            <legend class="text-sm font-semibold leading-6 text-gray-900">Phase Visibility *
                             </legend>
                             <p class="mt-1 text-sm leading-6 text-gray-600">Choose the phase visibility</p>
                             <div class="mt-1 space-y-3">
@@ -80,6 +80,7 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <p class="mt-10 text-sm leading-6 text-gray-600">(*) Required fields</p>
                     </div>
                     <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                         <a type="button" href="{{ route('projects.show', ['id'=>$phase->project->id]) }}" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
@@ -97,8 +98,4 @@
             </div>
         </form>
     </div>
-
-
-
-
 </x-app-layout>

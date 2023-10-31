@@ -12,7 +12,7 @@
             <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
                 <div class="px-4 sm:px-0">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Project Information</h2>
-                    <p class="mt-1 text-sm leading-6 text-gray-600">TPlease provide project information in the form
+                    <p class="mt-1 text-sm leading-6 text-gray-600">Please provide project information in the form
                         below.</p>
                 </div>
 
@@ -22,7 +22,7 @@
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-4">
                                 <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Project
-                                    name</label>
+                                    name *</label>
                                 <div class="mt-2">
                                     <div
                                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -41,7 +41,7 @@
                                         placeholder="Enter project description here"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                                 </div>
-                                <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about the project.
+                                <p class="mt-3 text-sm leading-6 text-gray-600">(*) Required fields
                                 </p>
                             </div>
                         </div>

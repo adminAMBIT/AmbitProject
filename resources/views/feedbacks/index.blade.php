@@ -70,7 +70,7 @@
                                         <tr>
                                             <td
                                                 class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 truncate-text">
-                                                <a class="hover:underline" href="#">{{ $feedback->description }}</a>
+                                                <p>{{ $feedback->description }}</p>
                                             </td>
                                             <td class="py-4 pl-3 pr-4 text-center items-center text-sm font-medium" style="display: flex; align-items: center; justify-content: center;">
                                                 <a href="{{ route('feedbacks.edit', ['document_id'=>$feedback->document->id ,'feedback_id'=>$feedback->id]) }}"

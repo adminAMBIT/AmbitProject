@@ -7,18 +7,22 @@
                     <li>
                         <div class="flex items-center">
                             <a href="{{ route('companies.show',['id'=>$contact->company->id]) }}"
-                                class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{ $contact->company->name }}</a>
+                                class="ml-4 text-xl font-medium text-gray-500 hover:text-gray-700">{{
+                                $contact->company->name }}</a>
                         </div>
                     </li>
 
                     <li>
                         <div class="flex items-center">
-                          <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                          </svg>
-                          <p class="ml-4 text-xl font-medium text-gray-500">{{ $contact->name }} - Edit Contact</p>
+                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <p class="ml-4 text-xl font-medium text-gray-500">{{ $contact->name }} - Edit Contact</p>
                         </div>
-                      </li>
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -31,7 +35,7 @@
                     <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
                         <div>
                             <h2 class="text-base font-semibold leading-7 text-gray-900">Contact Information</h2>
-                            <p class="mt-1 text-sm leading-6 text-gray-600">Please provide the representant information.
+                            <p class="mt-1 text-sm leading-6 text-gray-600">Please provide the contact information.
                             </p>
                         </div>
 
@@ -61,7 +65,7 @@
                             </div>
 
                             <div class="sm:col-span-4">
-                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email *
                                 </label>
                                 <div class="mt-2">
                                     <input id="email" name="email" type="email" autocomplete="email" required
@@ -101,9 +105,9 @@
                                 @error('user_type')
                                 <div class="text-red-600">{{ $message }}</div>
                                 @enderror
+                                <p class="mt-5 text-sm leading-6 text-gray-600">(*) Required fields</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -114,6 +118,7 @@
                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save
                         Contact</button>
                 </div>
+
             </form>
         </div>
         <form method="POST" action="{{ route('contacts.destroy', $contact->id) }}">

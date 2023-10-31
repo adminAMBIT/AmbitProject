@@ -38,7 +38,7 @@
                             <div class="sm:col-span-3">
                                 <label for="name"
                                     class="block text-sm font-medium leading-6 text-gray-900">Company
-                                    name</label>
+                                    name *</label>
                                 <div class="mt-2">
                                     <input type="text" name="name" id="name" value="{{ old('name', $company->name) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -50,7 +50,7 @@
 
                             <div class="sm:col-span-3">
                                 <label for="cif"
-                                    class="block text-sm font-medium leading-6 text-gray-900">CIF</label>
+                                    class="block text-sm font-medium leading-6 text-gray-900">CIF *</label>
                                 <div class="mt-2">
                                     <input type="text" name="cif" id="cif" value="{{ old('cif', $company->cif) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -62,7 +62,7 @@
 
                             <div class="sm:col-span-4">
                                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
-                                    address</label>
+                                    address *</label>
                                 <div class="mt-2">
                                     <input id="email" name="email" type="email" autocomplete="email" value="{{ old('email', $company->email) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -74,7 +74,7 @@
 
                             <div class="col-span-full">
                                 <label for="street_address"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
+                                    class="block text-sm font-medium leading-6 text-gray-900">Street address *</label>
                                 <div class="mt-2">
                                     <input type="text" name="street_address" id="street_address" value="{{ old('street_address', $company->street_address) }}"
                                         autocomplete="street-address"
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="sm:col-span-2 sm:col-start-1">
-                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
+                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City *</label>
                                 <div class="mt-2">
                                     <input type="text" name="city" id="city" value="{{ old('city', $company->city) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -101,7 +101,7 @@
 
                             <div class="sm:col-span-2">
                                 <label for="postal_code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
-                                    Postal code</label>
+                                    Postal code *</label>
                                 <div class="mt-2">
                                     <input type="text" name="postal_code" id="postal_code" autocomplete="postal_code" value="{{ old('postal_code', $company->postal_code) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -115,6 +115,7 @@
                                     <input id="country" name="country" type="text" autocomplete="country" value="{{ old('country', $company->country) }}"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
+                                <p class="mt-5 text-sm leading-6 text-gray-600">(*) Required fields</p>
                             </div>
                         </div>
                     </div>

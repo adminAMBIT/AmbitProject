@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="sm:col-span-4">
-                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email *
                                 </label>
                                 <div class="mt-2">
                                     <input id="email" name="email" type="email" autocomplete="email" required
@@ -97,6 +97,8 @@
                                 @error('user_type')
                                 <div class="text-red-600">{{ $message }}</div>
                                 @enderror
+                                <p class="mt-5 text-sm leading-6 text-gray-600">(*) Required fields</p>
+
                             </div>
                         </div>
 

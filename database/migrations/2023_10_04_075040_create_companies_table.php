@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name', 100)->unique();
             $table->string('cif', 15)->unique();
             $table->string('email', 100)->unique();
-            $table->string('country', 100);
+            $table->string('country', 100)->nullable();
             $table->string('street_address', 100);
             $table->string('city', 100);
-            $table->string('province', 100);
+            $table->string('province', 100)->nullable();
             $table->string('postal_code', 100);
             $table->timestamps();
         });
