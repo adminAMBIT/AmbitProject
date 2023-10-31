@@ -140,16 +140,20 @@ class DocumentController extends Controller
                 'file' => 'max:2048'
             ]);
 
-            $request->file->storeAs('documents/' . $project->title, $document->id . '.' . $document->extension, 'public');
-
             $document->name = pathinfo($request->file->getClientOriginalName(), PATHINFO_FILENAME);
             $document->extension = $request->file->getClientOriginalExtension();
             $document->size = $request->file->getSize();
             $document->status = "pending";
+            $request->file->storeAs('documents/' . $project->title, $document->id . '.' . $document->extension, 'public');
+
 
         } else {
             $document->name = $request->name;
-            $document->status = $request->status;
+            try{
+                $document->status = $request->status;
+            } catch (\Throwable $th) {
+                $document->status = "pending";
+            }
         }
 
         $document->save();
