@@ -19,7 +19,7 @@ class ProjectController extends Controller
         if ($user->is_admin) {
             $projects = Project::all();
         } else {
-            $projects = $user->company->projects;
+            $projects = $user->projects;
         }
 
         return view('projects.index', [
