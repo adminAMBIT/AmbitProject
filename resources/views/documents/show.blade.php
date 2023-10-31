@@ -71,12 +71,15 @@
                             quam corrupti consectetur.</p> -->
                     </div>
                     <div class="ml-4 mt-4 flex-shrink-0">
+
                         <a href="{{ route('document.edit', ['document_id'=>$document->id]) }}"
                             class="relative mx-1 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Edit
                             Document</a>
+                        @if(auth()->user()->is_admin == 1)
                         <a href="{{ route('feedbacks.index', ['document_id'=>$document->id]) }}"
                             class="relative mx-1 inline-flex items-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Manage
                             Feedbacks</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -90,21 +93,25 @@
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-900">Actions</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0" style="display: flex; align-items: center;">
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"
+                            style="display: flex; align-items: center;">
                             <a target="_blank" href="{{ route('document.view', ['document_id' => $document->id]) }}"
                                 class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
                             <a href="{{ route('document.download', ['document_id' => $document->id]) }}"
                                 class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
-                                @if(auth()->user()->is_admin == 1)
-                            <form method="POST" action="{{ route('document.destroy', ['document_id' => $document->id]) }}">
+                            @if(auth()->user()->is_admin == 1)
+                            <form method="POST"
+                                action="{{ route('document.destroy', ['document_id' => $document->id]) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure to delete this document?')" class="text-red-600 font-bold hover:text-red-800" style="border: none; background: none; cursor: pointer;">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure to delete this document?')"
+                                    class="text-red-600 font-bold hover:text-red-800"
+                                    style="border: none; background: none; cursor: pointer;">Delete</button>
                             </form>
                             @endif
                         </dd>
                     </div>
-                                   
+
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-900">Size</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ round($document->size
@@ -170,7 +177,8 @@
                                                                 $feedback->description }}</p>
                                                         </div>
                                                         <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                                            <time datetime="2020-09-20">{{ $feedback->getMonthAndDay() }}</time>
+                                                            <time datetime="2020-09-20">{{ $feedback->getMonthAndDay()
+                                                                }}</time>
                                                         </div>
                                                     </div>
                                                 </div>

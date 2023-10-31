@@ -110,7 +110,7 @@
                         </div>
 
 
-
+                        @if(auth()->user()->is_admin)
                         <!-- Estado -->
                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-900">Status</dt>
@@ -127,6 +127,7 @@
                                 </select>
                             </dd>
                         </div>
+                        @endif
                     </dl>
                 </div>
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">

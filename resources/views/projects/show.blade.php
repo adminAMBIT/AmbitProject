@@ -134,13 +134,15 @@
                                                                         }})</span>
                                                                 </a>
                                                             </td>
-                                                            @if(auth()->user()->is_admin)
                                                             <td
+                                                            @if(auth()->user()->is_admin)
+                                                            
                                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                                 <a href="{{ route('projects.phases.edit', ['project_id' => $project->id, 'phase_id' => $phase->id]) }}"
                                                                     class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                            </td>
+                                                            
                                                             @endif
+                                                        </td>
                                                         </tr>
                                                         @endforeach
                                                         @endif
