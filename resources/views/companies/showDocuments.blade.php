@@ -100,7 +100,7 @@
                                     <tbody class="divide-y divide-gray-200 bg-white">
                                         @if($documents->isEmpty())
                                         <tr>
-                                            <td colspan="4"
+                                            <td colspan="5"
                                                 class="py-4 text-center pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6">
                                                 No documents found
                                             </td>

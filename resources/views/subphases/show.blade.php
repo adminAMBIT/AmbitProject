@@ -217,7 +217,7 @@
                                                 @if($document->company_id == null)
                                                 Admin
                                                 @else
-                                                {{ $document->company->name }}
+                                                {{ $document->user->name }} ({{ $document->company->name }})
                                                 @endif
                                             </td>
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">

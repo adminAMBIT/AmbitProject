@@ -204,6 +204,7 @@ class DocumentController extends Controller
     {
         $project = Project::find($project_id);
         $company = Company::find($company_id);
+        $documents = $company->projectDocuments($project_id);
 
         return view('documents.downloadForm', compact('project', 'company'));
     }
