@@ -26,8 +26,8 @@ class Company extends Model
         return $this->hasMany(User::class);
     }
 
-    public function representant(){
-        return $this->users()->where('user_type_id', 1)->first();
+    public function representants(){
+        return $this->users()->where('user_type_id', 1)->get();
     }
 
     public function contacts()

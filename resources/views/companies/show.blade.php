@@ -87,16 +87,14 @@
             <div class="p-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
-                        <h1 class="text-base font-semibold leading-6 text-gray-900">Representant</h1>
+                        <h1 class="text-base font-semibold leading-6 text-gray-900">Representants</h1>
                         <p class="mt-2 text-sm text-gray-700">The comapny's legal representant </p>
                     </div>
-                    @if ($company->representant() == null)
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         <a type="button" href="{{ route('representants.create', ['company_id' => $company->id]) }}"
                             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
                             Representant</a>
                     </div>
-                    @endif
                 </div>
                 <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -117,24 +115,26 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                        @if ($company->representant() == null)
+                                        @if ($company->representants() == null)
                                         <tr>
                                             <td colspan="3"
                                                 class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 sm:pl-6">
-                                                No representant found</td>
+                                                No representants found</td>
                                         </tr>
                                         @else
+                                        @foreach($company->representants() as $representant)
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {{ $company->representant()->name }}</td>
+                                                {{ $representant->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
-                                                $company->representant()->email }}</td>
+                                                $representant->email }}</td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="{{ route('representants.show', ['id' => $company->representant()->id]) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                                <a href="{{ route('representants.show', ['id' => $representant->id]) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         @endif
                                     </tbody>
                                 </table>

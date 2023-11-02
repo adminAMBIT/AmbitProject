@@ -90,6 +90,9 @@
                                                 Uploaded by</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Status</th>
+                                            <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-left text-sm text-center font-semibold text-gray-900 sm:pl-6">
                                                 Actions</th>
                                             </th>
                                         </tr>
@@ -119,12 +122,24 @@
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                 {{ $document->user->name}}
                                             </td>
+                                            @if($document->status == 'pending')
                                             <td
-                                                class="relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-yellow-500 sm:pl-6">
+                                                @elseif($document->status == 'correct')
+                                                <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-green-500 sm:pl-6">
+                                                @elseif($document->status == 'incorrect')
+                                                <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-red-700 sm:pl-6">
+                                                @endif
+                                                {{ strtoupper($document->status) }}
+                                            </td>
+                                            <td
+                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                <a href="{{ route('document.show', ['document_id' => $document->id]) }}"
+                                                    class="mr-4 text-indigo-600 hover:text-indigo-900">Show</a>
                                                 <a href="{{ route('document.view', ['document_id' => $document->id]) }}"
                                                     class="mr-4 text-green-600 hover:text-green-900">View</a>
-                                                <a href="{{ route('document.download', ['document_id' => $document->id]) }}"
-                                                    class="text-indigo-600 hover:text-indigo-900">Download</a>
                                             </td>
                                         </tr>
                                         @endforeach
