@@ -110,6 +110,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/edit-document/{document_id}', [DocumentController::class, 'update'])->name('document.update');
     Route::delete('/delete-document/{document_id}', [DocumentController::class, 'destroy'])->name('document.destroy');
     Route::get('/project/{project_id}/company/{company_id}/downloadAll', [DocumentController::class,'downloadAll'])->name('projects.companies.documents.downloadAll')->middleware('admin');
+    Route::get('/projects/{project_id}/company/{company_id}/downloadForm', [DocumentController::class, 'downloadForm'])->name('projects.companies.documents.downloadForm')->middleware('admin');
+    Route::post('/projects/{project_id}/company/{company_id}/downloadForm', [DocumentController::class, 'downloadByStatus'])->middleware('admin');
+
 
     // FEEDBACK
     Route::get('/documents/{document_id}/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index')->middleware('admin');

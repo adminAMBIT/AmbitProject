@@ -149,7 +149,7 @@ class DocumentController extends Controller
 
         } else {
             $document->name = $request->name;
-            try{
+            try {
                 $document->status = $request->status;
             } catch (\Throwable $th) {
                 $document->status = "pending";
@@ -195,6 +195,51 @@ class DocumentController extends Controller
             $zip->addFile($path, $document->downloadPath . '.' . $document->name . '.' . $document->extension);
         }
 
+        $zip->close();
+
+        return response()->download(storage_path('app/public/documents/' . $fileName))->deleteFileAfterSend(true);
+    }
+
+    public function downloadForm(string $project_id, string $company_id)
+    {
+        $project = Project::find($project_id);
+        $company = Company::find($company_id);
+
+        return view('documents.downloadForm', compact('project', 'company'));
+    }
+
+    public function downloadByStatus(Request $request, string $project_id, string $company_id)
+    {
+        $project = Project::find($project_id);
+        $company = Company::find($company_id);
+        $fileName = $project->title . '_' . $company->name;
+        $documents = [];
+
+        if ($request->correct) {
+            $correctDocuments = Document::where('status', 'correct')->get()->toArray();
+            $fileName .= '_correct';
+            $documents = array_merge($documents, $correctDocuments);
+        }
+
+        if ($request->pending) {
+            $pendingDocuments = Document::where('status', 'pending')->get()->toArray();
+            $fileName .= '_pending';
+            $documents = array_merge($documents, $pendingDocuments);
+        }
+
+        if ($request->incorrect) {
+            $incorrectDocuments = Document::where('status', 'incorrect')->get()->toArray();
+            $fileName .= '_incorrect';
+            $documents = array_merge($documents, $incorrectDocuments);
+        }
+
+        $zip = new ZipArchive;
+        $fileName .= '.zip';
+        $zip->open(storage_path('app/public/documents/' . $fileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        foreach ($documents as $document) {
+            $path = storage_path('app/public/documents/' . $project->title . '/' . $document['id'] . '.' . $document['extension']);
+            $zip->addFile($path, $document['downloadPath'] . '.' . $document['name'] . '.' . $document['extension']);
+        }
         $zip->close();
 
         return response()->download(storage_path('app/public/documents/' . $fileName))->deleteFileAfterSend(true);

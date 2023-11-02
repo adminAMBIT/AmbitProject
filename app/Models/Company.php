@@ -44,4 +44,9 @@ class Company extends Model
     {
         return $this->hasMany(Document::class);
     }
+
+    public function projectDocuments($project_id)
+    {
+        return $this->documents()->where('project_id', $project_id)->get();
+    }
 }

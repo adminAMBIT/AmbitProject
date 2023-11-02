@@ -40,4 +40,8 @@ class Document extends Model
         return $this->hasMany(Feedback::class);
     }
     
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

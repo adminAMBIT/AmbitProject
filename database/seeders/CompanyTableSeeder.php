@@ -25,7 +25,7 @@ class CompanyTableSeeder extends Seeder
         ]);
 
         DB::table('companies')->insert([
-            'name'=>'JJP ',
+            'name'=>'JJP',
             'cif'=>'B-12345672',
             'email'=>'info@jjp.com',
             'country'=>'Spain',
