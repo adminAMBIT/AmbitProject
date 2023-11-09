@@ -115,7 +115,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                        @if ($company->representants() == null)
+                                        @if ($company->representants()->isEmpty())
                                         <tr>
                                             <td colspan="3"
                                                 class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 sm:pl-6">

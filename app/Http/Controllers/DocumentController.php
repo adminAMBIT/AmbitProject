@@ -47,7 +47,7 @@ class DocumentController extends Controller
     public function store(Request $request, string $project_id, string $phase_id, string $subphase_id)
     {
         $request->validate([
-            'files.*' => 'required|max:2048'
+            'files.*' => 'required|max:10240'
         ]);
 
         // VARIABLES

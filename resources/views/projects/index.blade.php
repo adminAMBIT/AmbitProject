@@ -33,7 +33,7 @@
             @foreach ($projects as $project)
             <li
                 class="overflow-hidden rounded-xl border border-gray-200 transition-transform duration-300 transform hover:scale-105">
-                <a href="/projects/{{$project->id}}">
+                <a href="{{ route('projects.show', ['id'=>$project->id]) }}">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6 hover:bg-gray-200">
                         <!-- <img src="https://tailwindui.com/img/logos/48x48/tuple.svg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10"> -->
                         <div class="text-sm font-medium leading-6 text-gray-900">{{ $project->title }}</div>

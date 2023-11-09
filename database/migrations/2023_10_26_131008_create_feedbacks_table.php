@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->text('description');
-            $table->unsignedBigInteger('document_id');
+            $table->string('document_id');
             $table->timestamps();
         });
 
-        Schema::table('feedback', function (Blueprint $table) {
+        Schema::table('feedbacks', function (Blueprint $table) {
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
         });
     }
