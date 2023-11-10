@@ -46,54 +46,61 @@ class DocumentController extends Controller
      */
     public function store(Request $request, string $project_id, string $phase_id, string $subphase_id)
     {
-        $request->validate([
-            'files.*' => 'required|max:10240'
-        ]);
+        try{
 
-        // VARIABLES
-        $subphase = Subphase::find($subphase_id);
-        $last2Parents = $subphase->getAllParentSubphases()->take(-2);
-        $project = Project::find($project_id);
+        
+            $request->validate([
+                'files.*' => 'required|max:20000'
+            ]);
 
-        // MAKE DIRECTORIES
-        if (!File::exists(storage_path('app/public/documents/' . $project->title))) {
-            File::makeDirectory(storage_path('app/public/documents/' . $project->title), $mode = 0777, true, true);
+            // VARIABLES
+            $subphase = Subphase::find($subphase_id);
+            $last2Parents = $subphase->getAllParentSubphases()->take(-2);
+            $project = Project::find($project_id);
+
+            // MAKE DIRECTORIES
+            if (!File::exists(storage_path('app/public/documents/' . $project->title))) {
+                File::makeDirectory(storage_path('app/public/documents/' . $project->title), $mode = 0777, true, true);
+            }
+
+            // SET COMPANY NAME
+            if (Auth::user()->is_admin) {
+                $companyName = 'Admin';
+            } else {
+                $companyName = Auth::user()->company->name;
+            }
+
+            // SET PERSONALIZED NAME
+            $downloadPathName = $project->title . '_' . $companyName . '_' . $last2Parents->implode('name', '_') . '_' . $subphase->name;
+            $downloadPathName = str_replace(' ', '_', $downloadPathName);
+
+            foreach ($request->file('files') as $file) {
+                $fileId = hexdec(uniqid());
+                $fileExtension = $file->getClientOriginalExtension();
+                $fileSize = $file->getSize();
+
+                $file->storeAs('documents/' . $project->title, $fileId . '.' . $fileExtension, 'public');
+
+                $document = new Document();
+                $document->id = $fileId;
+                $document->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $document->downloadPath = $downloadPathName;
+                $document->extension = $fileExtension;
+                $document->size = $fileSize;
+                $document->subphase_id = $subphase_id;
+                $document->user_id = Auth::user()->id;
+                $document->company_id = Auth::user()->company_id;
+                $document->project_id = $project_id;
+                $document->save();
+            }
+
+            session()->flash('uploaded', 'Documents uploaded successfully');
+
+            return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase_id]);
+        } catch (\Exception $e) {
+            session()->flash('error', 'Documents could not be uploaded. If the problem persists, you can send the files at admin@ambitcluster.org');
+            return redirect()->route('projects.phases.subphases.document.create', [$project_id, $phase_id, $subphase_id]);
         }
-
-        // SET COMPANY NAME
-        if (Auth::user()->is_admin) {
-            $companyName = 'Admin';
-        } else {
-            $companyName = Auth::user()->company->name;
-        }
-
-        // SET PERSONALIZED NAME
-        $downloadPathName = $project->title . '_' . $companyName . '_' . $last2Parents->implode('name', '_') . '_' . $subphase->name;
-        $downloadPathName = str_replace(' ', '_', $downloadPathName);
-
-        foreach ($request->file('files') as $file) {
-            $fileId = hexdec(uniqid());
-            $fileExtension = $file->getClientOriginalExtension();
-            $fileSize = $file->getSize();
-
-            $file->storeAs('documents/' . $project->title, $fileId . '.' . $fileExtension, 'public');
-
-            $document = new Document();
-            $document->id = $fileId;
-            $document->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $document->downloadPath = $downloadPathName;
-            $document->extension = $fileExtension;
-            $document->size = $fileSize;
-            $document->subphase_id = $subphase_id;
-            $document->user_id = Auth::user()->id;
-            $document->company_id = Auth::user()->company_id;
-            $document->project_id = $project_id;
-            $document->save();
-        }
-
-        session()->flash('uploaded', 'Documents uploaded successfully');
-
-        return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase_id]);
     }
 
     /**

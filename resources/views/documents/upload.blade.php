@@ -38,7 +38,7 @@
                                 }}</a>
                         </div>
                     </li>
-                    
+
                     <li>
                         <div class="flex items-center">
                             <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
@@ -57,9 +57,29 @@
 
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <div class="space-y-10 divide-y divide-gray-900/10">
-            <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="post" enctype="multipart/form-data">
+            <form class="bg-white shadow-sm pt-3 ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" method="post"
+                enctype="multipart/form-data">
                 @csrf
-                <div class="px-4 py-6 flex justify-center sm:p-8">
+                @if(session('error'))
+                <div class="rounded-md bg-red-50 p-4 w-1/2 mx-auto">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-800">{{ session('error') }}</h3>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                <div class="px-4 py-4 flex justify-center sm:p-8">
+
                     <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                         <div class="col-span-full">
@@ -80,17 +100,21 @@
                                         <label for="file-upload"
                                             class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                             <span>Upload a file</span>
-                                            <input id="file-upload" name="files[]" type="file" class="sr-only"
-                                                multiple required>
+                                            <input id="file-upload" name="files[]" type="file" class="sr-only" multiple
+                                                required>
                                         </label>
                                         <p class="pl-1">or drag and drop</p>
                                     </div>
+
                                     <!-- <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p> -->
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
+
+
 
                 <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                     <dl class="divide-y divide-gray-100">
@@ -105,9 +129,11 @@
                     </dl>
                 </div>
 
+
                 <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-                    <a href="{{ route('projects.phases.subphases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}" type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
-                    <button type="submit" 
+                    <a href="{{ route('projects.phases.subphases.show', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id]) }}"
+                        type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
+                    <button type="submit"
                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Upload</button>
                 </div>
             </form>
