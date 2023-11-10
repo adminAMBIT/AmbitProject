@@ -37,7 +37,6 @@ class RepresentantController extends Controller
     public function store(Request $request, $company_id)
     {
         $rules = [
-            'name' => 'unique:users,name',
             'nif' => 'required | unique:users,nif',
             'email' => 'required | unique:users,email',
         ];
@@ -98,7 +97,6 @@ class RepresentantController extends Controller
     public function update(Request $request, string $id)
     {
         $rules = [
-            'name' => 'required | unique:users,name,' . $id,
             'nif' => 'required | unique:users,nif,' . $id,
             'email' => 'required | unique:users,email,' . $id,
         ];
