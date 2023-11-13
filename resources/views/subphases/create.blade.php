@@ -35,7 +35,7 @@
                                     d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <p class="ml-4 text-xl font-medium text-gray-800">Create</p>
+                            <p class="ml-4 text-xl font-medium text-gray-800">Create Subphase</p>
                         </div>
                     </li>
                 </ol>
@@ -53,7 +53,7 @@
 
             <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-4 md:grid-cols-3">
                 <div class="px-4 sm:px-0">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900">Phase Information</h2>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Subphase Information</h2>
                     <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.
                     </p>
                 </div>
@@ -77,6 +77,30 @@
                                     <textarea id="description" name="description" type="text"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                                 </div>
+                            </div>
+
+                            <div class="sm:col-span-4">
+                                <div>
+                                    <label class="block text-sm font-medium leading-6 text-gray-900">Documents</label>
+                                    <p class="text-sm text-gray-500">The users could upload documents?</p>
+                                    <fieldset class="mt-4">
+                                        <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                                            <div class="flex items-center">
+                                                <input id="sms" name="has_documents" type="radio" value="1"
+                                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                <label for="sms"
+                                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">Yes</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input id="push" name="has_documents" type="radio" value="0" required
+                                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                <label for="push"
+                                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">No</label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
                             </div>
 
 

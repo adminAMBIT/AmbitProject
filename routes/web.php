@@ -52,7 +52,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/companies/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit')->middleware('admin');
     Route::post('/companies/{id}/edit', [CompanyController::class, 'update'])->middleware('admin');
     Route::delete('/companies/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy')->middleware('admin');
-    Route::get('/projects/{project_id}/company/{company_id}/documents', [CompanyController::class,'showDocuments'])->name('projects.companies.documents.index')->middleware('admin');
+    Route::get('/projects/{project_id}/company/{company_id}/documents', [CompanyController::class,'showDocuments'])->name('projects.companies.documents.index');
 
     // REPRESENTANTS
     Route::get('/companies/{company_id}/create-respresentant', [RepresentantController::class, 'create'])->name('representants.create')->middleware('admin');

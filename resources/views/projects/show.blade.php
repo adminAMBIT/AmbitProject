@@ -214,6 +214,16 @@
                     </div>
                     @endif
                 </div>
+                @if(auth()->user()->is_admin != 1)
+                <!-- MY DOCUMENTS -->
+                <div class="bg-white mt-3 px-2 py-2 shadow sm:rounded-lg sm:px-6">
+                    <div class="mt-4 mb-4 flex flex-col justify-stretch">
+                        <a href="{{ route('projects.companies.documents.index', ['project_id' => $project->id, 'company_id'=>auth()->user()->company->id]) }}"
+                            type="button"
+                            class="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">My documents</a>
+                    </div>
+                </div>
+                @endif
             </section>
             
         </div>

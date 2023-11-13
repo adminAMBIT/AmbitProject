@@ -145,6 +145,7 @@
     @endif
 
     <!-- DOCUMENTS TABLE -->
+    @if($subphase->has_documents == 1)
     <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">
@@ -238,4 +239,5 @@
             </div>
         </div>
     </div>
+    @endif
 </x-app-layout>

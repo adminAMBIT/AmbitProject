@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Document;
 use App\Models\UserType;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class CompanyController extends Controller
@@ -83,7 +84,7 @@ class CompanyController extends Controller
      */
     public function show(string $id)
     {
-        
+
         $company = Company::find($id);
 
         return view('companies.show', [
@@ -145,7 +146,7 @@ class CompanyController extends Controller
         $company->postal_code = $request->postal_code;
 
         $company->save();
-        
+
         session()->flash('updated', 'Company updated successfully');
 
         return redirect()->route('companies.show', [$company->id]);
@@ -166,8 +167,15 @@ class CompanyController extends Controller
     public function showDocuments(string $project_id, string $company_id)
     {
         $project = Project::find($project_id);
-        $company = Company::find($company_id);
-        $documents = Document::where('company_id', $company_id)->where('project_id', $project_id)->get();
-        return view('companies.showDocuments', compact('company', 'documents', 'project'));
+        if (Auth::user()->is_admin) {
+            $company = Company::find($company_id);
+            $documents = Document::where('company_id', $company_id)->where('project_id', $project_id)->get();
+            return view('companies.showDocuments', compact('company', 'documents', 'project'));
+        } else {
+            $company = Auth::user()->company;
+            $documents = Document::where('company_id', $company->id)->where('project_id', $project_id)->get();
+            return view('companies.showDocuments', compact('company', 'documents', 'project'));
+        }
+
     }
 }

@@ -10,7 +10,7 @@
                                 }}</a>
                         </div>
                     </li>
-
+                    @if(auth()->user()->is_admin)
                     <li>
                         <div class="flex items-center">
                             <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
@@ -37,7 +37,7 @@
                                 }}</a>
                         </div>
                     </li>
-
+                    @endif
                     <li>
                         <div class="flex items-center">
                             <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
@@ -84,7 +84,7 @@
                                                 Name</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                                Size</th>
+                                                Subphase</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                                 Uploaded by</th>
@@ -115,8 +115,7 @@
                                             </td>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {{ round($document->size
-                                                / 1048576, 2) }} MB
+                                                {{ $document->subphase->name }} ({{ $document->subphase->phase->name }})
                                             </td>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">

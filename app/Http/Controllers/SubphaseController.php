@@ -45,6 +45,7 @@ class SubphaseController extends Controller
             'description' => $request->description,
             'phase_id' => session('phase_id'),
             'subphase_parent_id' => $parent_id,
+            'has_documents' => $request->has_documents,
         ]);
 
         session()->flash('success', 'Subphase created successfully');
@@ -100,6 +101,7 @@ class SubphaseController extends Controller
 
         $subphase->name = $request->name;
         $subphase->description = $request->description;
+        $subphase->has_documents = $request->has_documents;
 
         $subphase->save();
 

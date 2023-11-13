@@ -71,10 +71,11 @@
                             quam corrupti consectetur.</p> -->
                     </div>
                     <div class="ml-4 mt-4 flex-shrink-0">
-
+                        @if($document->status != 'correct' || auth()->user()->is_admin == 1)
                         <a href="{{ route('document.edit', ['document_id'=>$document->id]) }}"
                             class="relative mx-1 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Edit
                             Document</a>
+                        @endif
                         @if(auth()->user()->is_admin == 1)
                         <a href="{{ route('feedbacks.index', ['document_id'=>$document->id]) }}"
                             class="relative mx-1 inline-flex items-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Manage
@@ -149,7 +150,7 @@
                         <dt class="text-sm font-medium leading-6 text-gray-900">Feedbacks</dt>
                         <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                             <div class="flow-root">
-                                @if($document->feedbacks->count() == 0)
+                                @if($document->status != 'correct' && count($feedbacks) == 0)
                                 <p class="text-sm text-gray-500">No feedbacks yet</p>
                                 @endif
                                 <ul role="list" class="-mb-8">
