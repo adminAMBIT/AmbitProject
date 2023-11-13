@@ -96,7 +96,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}', [SubphaseController::class, 'show'])->name('projects.phases.subphases.show');
     Route::get('/projects/{project_id}/phases/{phase_id}/edit-subphase/{subphase_id}', [SubphaseController::class, 'edit'])->name('projects.phases.subphases.edit')->middleware('admin');
     Route::post('/projects/{project_id}/phases/{phase_id}/edit-subphase/{subphase_id}', [SubphaseController::class, 'update'])->middleware('admin');
-    Route::delete('/projects/{project_id}/phases/{phase_id}/delete-subphase/{subphase_parent_id}', [SubphaseController::class, 'destroy'])->name('projects.phases.subphases.destroy')->middleware('admin');
+    Route::delete('/projects/{project_id}/phases/{phase_id}/delete-subphase/{subphase_id}', [SubphaseController::class, 'destroy'])->name('projects.phases.subphases.destroy')->middleware('admin');
 
 
     // DOCUMENTS

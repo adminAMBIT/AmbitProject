@@ -57,6 +57,7 @@ class PhaseController extends Controller
         $phase = Phase::findOrFail($phase_id);
         $subphases = Subphase::where('phase_id', $phase_id)
                    ->where('subphase_parent_id', null)
+                   ->orderBy('name', 'asc')
                    ->get();
         return view('phases.show', compact('phase', 'subphases'));
     }

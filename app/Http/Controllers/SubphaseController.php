@@ -66,7 +66,7 @@ class SubphaseController extends Controller
         $phase = Phase::find($phase_id);
 
         $subphase = Subphase::find($subphase_id);
-        $subphaseChildren = Subphase::where('subphase_parent_id', $subphase_id)->get();
+        $subphaseChildren = Subphase::where('subphase_parent_id', $subphase_id)->orderBy('name', 'ASC')->get();
 
         session(['parent_id' => $subphase_id]);
 
