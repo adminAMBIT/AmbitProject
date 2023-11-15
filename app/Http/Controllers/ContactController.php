@@ -42,7 +42,6 @@ class ContactController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'nif' => 'unique:users,nif',
             'email' => 'required | unique:users,email',
             'user_type_id' => 'required',
         ];
@@ -111,7 +110,6 @@ class ContactController extends Controller
     public function update(Request $request, string $id)
     {
         $rules = [
-            'nif' => 'unique:users,nif,' . $id,
             'email' => 'required | unique:users,email,'. $id,
             'user_type_id' => 'required',
         ];
