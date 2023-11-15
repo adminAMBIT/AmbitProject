@@ -14,6 +14,7 @@ class Subphase extends Model
         'description',
         'subphase_parent_id',
         'phase_id',
+        'has_documents'
     ];
 
     public function phase()
