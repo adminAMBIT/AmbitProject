@@ -24,7 +24,9 @@ export default {
     },
 
     plugins: [
-        forms,
+        require('@tailwindcss/forms')({
+            strategy: 'class',
+        }),
         typography
     ],
 };
