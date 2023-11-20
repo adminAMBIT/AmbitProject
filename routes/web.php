@@ -38,6 +38,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit')->middleware('admin');
     Route::post('/projects/{id}/edit', [ProjectController::class, 'update'])->middleware('admin');
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy')->middleware('admin');
+    Route::get('/projects/{project_id}/documents', [ProjectController::class,'showDocuments'])->name('projects.documents.index')->middleware('admin');
 
     Route::get('/project/{project_id}/company/{company_id}/manageUsers', [ProjectController::class,'manageUsers'])->name('projects.companies.manageUsers.index')->middleware('admin');
     Route::post('/project/{project_id}/company/{company_id}/manageUsers', [ProjectController::class,'manageUsersStore'])->name('projects.companies.manageUsers.store')->middleware('admin');

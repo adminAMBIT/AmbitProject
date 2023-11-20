@@ -188,5 +188,16 @@ class ProjectController extends Controller
         return redirect()->route('projects.companies.manageUsers.index', ['project_id' => $project_id, 'company_id' => $company_id]);
     }
 
+    public function showDocuments(string $project_id)
+    {
+        $project = Project::find($project_id);
+        $documents = $project->documents;
+
+        return view('projects.showDocuments', [
+            'project' => $project,
+            'documents' => $documents
+        ]);
+    }
+
 
 }
