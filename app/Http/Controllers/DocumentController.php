@@ -243,8 +243,12 @@ class DocumentController extends Controller
         $fileName .= '.zip';
         $zip->open(storage_path('app/public/documents/' . $fileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
         foreach ($documents as $document) {
-            $path = storage_path('app/public/documents/' . $project->title . '/' . $document['id'] . '.' . $document['extension']);
-            $zip->addFile($path, $document['downloadPath'] . '.' . $document['name'] . '.' . $document['extension']);
+            try{
+                $path = storage_path('app/public/documents/' . $project->title . '/' . $document['id'] . '.' . $document['extension']);
+                $zip->addFile($path, $document['downloadPath'] . '.' . $document['name'] . '.' . $document['extension']);
+            } catch (\Throwable $th) {
+                continue;
+            }
         }
         $zip->close();
 
