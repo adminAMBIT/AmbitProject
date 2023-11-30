@@ -77,7 +77,7 @@
     @endif
 
 
-    
+
 
 
 
@@ -88,14 +88,15 @@
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="text-xl font-medium text-gray-500">Instructions</h1>
-                        <p>{{ $subphase->description }}</p>
+                        <p>{!! nl2br($subphase->description) !!}</p>
                     </div>
                     @if(auth()->user()->is_admin == 1)
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                        
+
                         <a type="button"
                             href="{{ route('projects.phases.subphases.instruction.create', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase->id, 'subphase_id'=>$subphase->id])  }}"
-                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Instruction</a>
+                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
+                            Instruction</a>
                     </div>
                     @endif
                 </div>
@@ -132,11 +133,12 @@
                                                 {{ $instruction->name }}
                                             </td>
                                             <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
-                                                <a href="{{ $instruction->link }}" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                                <a href="{{ $instruction->link }}" target="_blank"
+                                                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                                                     {{ $instruction->link }}
-                                                  </a>
+                                                </a>
                                             </td>
-                                            
+
                                             <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
                                                 <div class="flex justify-center items-center">
                                                     <a href="{{ $instruction->link }}" target="_blank"
@@ -146,7 +148,7 @@
                                                         class="ml-2 text-indigo-600 font-bold hover:text-indigo-800">Edit</a>
                                                     @endif
                                                 </div>
-                                                
+
                                             </td>
                                         </tr>
                                         @endforeach
