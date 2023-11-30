@@ -46,6 +46,7 @@ class SubphaseController extends Controller
             'phase_id' => session('phase_id'),
             'subphase_parent_id' => $parent_id,
             'has_documents' => $request->has_documents,
+            'has_instructions' => $request->has_instructions,
         ]);
 
         session()->flash('success', 'Subphase created successfully');
@@ -73,13 +74,15 @@ class SubphaseController extends Controller
 
         $parentSubphases = $subphase->getAllParentSubphases();
 
+        $instructions = $subphase->instructions;
+
         if (auth()->user()->is_admin || $phase->is_private == 0) {
             $documents = $subphase->documents;
         } else {
             $documents = $subphase->documents->where('company_id', auth()->user()->company_id)->concat($subphase->documents->where('company_id', null));
         }
         
-        return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases', 'documents'));
+        return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases', 'documents', 'instructions'));
     }
 
     /**
@@ -102,6 +105,7 @@ class SubphaseController extends Controller
         $subphase->name = $request->name;
         $subphase->description = $request->description;
         $subphase->has_documents = $request->has_documents;
+        $subphase->has_instructions = $request->has_instructions;
 
         $subphase->save();
 

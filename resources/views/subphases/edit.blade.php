@@ -109,6 +109,30 @@
 
                             </div>
 
+                            <div class="sm:col-span-4">
+                                <div>
+                                    <label class="block text-sm font-medium leading-6 text-gray-900">Instructions</label>
+                                    <p class="text-sm text-gray-500">This subphase has instructions?</p>
+                                    <fieldset class="mt-4">
+                                        <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                                            <div class="flex items-center">
+                                                <input id="sms" name="has_instructions" type="radio" value="1" {{ $subphase->has_instructions ? 'checked' : '' }}
+                                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                <label for="sms"
+                                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">Yes</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input id="push" name="has_instructions" type="radio" value="0" required {{ !$subphase->has_instructions ? 'checked' : '' }}
+                                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                <label for="push"
+                                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">No</label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                            </div>
+
 
                         </div>
                     </div>

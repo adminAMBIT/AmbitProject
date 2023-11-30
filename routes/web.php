@@ -1,16 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\RepresentantController;
-use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PhaseController;
-use App\Http\Controllers\SubphaseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InstructionController;
+use App\Http\Controllers\PhaseController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RepresentantController;
+use App\Http\Controllers\SubphaseController;
+use App\Http\Controllers\UserTypeController;
+use App\Models\Instruction;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +124,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/documents/{document_id}/feedbacks/{feedback_id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit')->middleware('admin');
     Route::post('/documents/{document_id}/feedbacks/{feedback_id}/edit', [FeedbackController::class, 'update'])->name('feedbacks.update')->middleware('admin');
     Route::delete('/feedbacks/{feedback_id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy')->middleware('admin');
+
+    // INSTRUCTIONS
+    Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/create-instruction', [InstructionController::class, 'create'])->name('projects.phases.subphases.instruction.create')->middleware('admin');
+    Route::post('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/create-instruction', [InstructionController::class, 'store'])->middleware('admin');
+    Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/edit-instruction/{instruction_id}', [InstructionController::class, 'edit'])->name('projects.phases.subphases.instruction.edit')->middleware('admin');
+    Route::post('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/edit-instruction/{instruction_id}', [InstructionController::class, 'update'])->middleware('admin');
+    Route::delete('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/delete-instruction/{instruction_id}', [InstructionController::class, 'destroy'])->name('projects.phases.subphases.instruction.destroy')->middleware('admin');
+
 
 });
 

@@ -14,7 +14,8 @@ class Subphase extends Model
         'description',
         'subphase_parent_id',
         'phase_id',
-        'has_documents'
+        'has_documents',
+        'has_instructions',
     ];
 
     public function phase()
@@ -52,5 +53,10 @@ class Subphase extends Model
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function instructions()
+    {
+        return $this->hasMany(Instruction::class);
     }
 }

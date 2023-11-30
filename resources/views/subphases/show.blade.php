@@ -76,6 +76,92 @@
     <x-green-alert message="{{ session('documentDeleted') }}" />
     @endif
 
+
+    
+
+
+
+    @if($subphase->has_instructions == 1)
+    <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
+        <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:px-6 lg:px-8">
+                <div class="sm:flex sm:items-center">
+                    <div class="sm:flex-auto">
+                        <h1 class="text-xl font-medium text-gray-500">Instructions</h1>
+                        <p>{{ $subphase->description }}</p>
+                    </div>
+                    @if(auth()->user()->is_admin == 1)
+                    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                        
+                        <a type="button"
+                            href="{{ route('projects.phases.subphases.instruction.create', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase->id, 'subphase_id'=>$subphase->id])  }}"
+                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Instruction</a>
+                    </div>
+                    @endif
+                </div>
+                <div class="mt-8 flow-root">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Name</th>
+                                            <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Link</th>
+                                            <th scope="col"
+                                                class="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6">
+                                                ACTIONS</th>
+
+                                        </tr>
+                                    </thead>
+                                    @if($instructions->count() == 0)
+                                    <tbody class="divide-y divide-gray-200 bg-white">
+                                        <tr>
+                                            <td colspan="4"
+                                                class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 sm:pl-6">
+                                                No instructions yet</td>
+                                        </tr>
+                                        @else
+                                        @foreach($instructions as $instruction)
+                                        <tr>
+                                            <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
+                                                {{ $instruction->name }}
+                                            </td>
+                                            <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
+                                                <a href="{{ $instruction->link }}" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                                    {{ $instruction->link }}
+                                                  </a>
+                                            </td>
+                                            
+                                            <td class="py-4 pl-3 pr-4 text-center text-sm font-medium">
+                                                <div class="flex justify-center items-center">
+                                                    <a href="{{ $instruction->link }}" target="_blank"
+                                                        class="text-green-600 font-bold hover:text-green-800">Visit</a>
+                                                    @if(auth()->user()->is_admin == 1)
+                                                    <a href="{{ route('projects.phases.subphases.instruction.edit', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase->id, 'subphase_id'=>$subphase->id, 'instruction_id'=>$instruction->id]) }}"
+                                                        class="ml-2 text-indigo-600 font-bold hover:text-indigo-800">Edit</a>
+                                                    @endif
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <!-- SUBPHASES TABLE -->
     @if($subphaseChildren->count() > 0 || auth()->user()->is_admin == 1)
     <div class="mx-auto max-w-7xl mt-3 px-4 sm:px-6 lg:px-8">
