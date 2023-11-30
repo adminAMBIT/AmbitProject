@@ -100,7 +100,6 @@
                                 class="text-green-600 font-bold hover:text-green-800 mr-2">View</a>
                             <a href="{{ route('document.download', ['document_id' => $document->id]) }}"
                                 class="text-indigo-600 font-bold hover:text-indigo-800 mr-2">Download</a>
-                            @if(auth()->user()->is_admin == 1)
                             <form method="POST"
                                 action="{{ route('document.destroy', ['document_id' => $document->id]) }}">
                                 @csrf
@@ -109,7 +108,6 @@
                                     class="text-red-600 font-bold hover:text-red-800"
                                     style="border: none; background: none; cursor: pointer;">Delete</button>
                             </form>
-                            @endif
                         </dd>
                     </div>
 
