@@ -77,7 +77,7 @@ class SubphaseController extends Controller
         $instructions = $subphase->instructions;
 
         if (auth()->user()->is_admin || $phase->is_private == 0) {
-            $documents = $subphase->documents->sortBy('company_id', 'ASC');
+            $documents = $subphase->documents->sortBy('company_id');
         } else {
             $documents = $subphase->documents->where('company_id', auth()->user()->company_id)->concat($subphase->documents->where('company_id', null));
         }
