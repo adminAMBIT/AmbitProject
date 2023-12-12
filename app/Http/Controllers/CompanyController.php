@@ -169,11 +169,20 @@ class CompanyController extends Controller
         $project = Project::find($project_id);
         if (Auth::user()->is_admin) {
             $company = Company::find($company_id);
-            $documents = Document::where('company_id', $company_id)->where('project_id', $project_id)->get();
+            $documents = Document::join('subphases', 'documents.subphase_id', '=', 'subphases.id')
+                ->where('documents.company_id', $company->id)
+                ->where('documents.project_id', $project_id)
+                ->orderBy('subphases.name')
+                ->get();
             return view('companies.showDocuments', compact('company', 'documents', 'project'));
         } else {
             $company = Auth::user()->company;
-            $documents = Document::where('company_id', $company->id)->where('project_id', $project_id)->get();
+            $documents = Document::join('subphases', 'documents.subphase_id', '=', 'subphases.id')
+                ->where('documents.company_id', $company->id)
+                ->where('documents.project_id', $project_id)
+                ->orderBy('subphases.name')
+                ->get();
+
             return view('companies.showDocuments', compact('company', 'documents', 'project'));
         }
 

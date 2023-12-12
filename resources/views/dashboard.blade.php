@@ -48,6 +48,11 @@
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
+                                            @if (count($documents) == 0)
+                                            <tr>
+                                                <td colspan="5" class="text-center py-4">No documents found</td>
+                                            </tr>
+                                            @else
                                             @foreach ($documents as $document)
                                             <tr>
                                                 <td
@@ -67,6 +72,7 @@
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

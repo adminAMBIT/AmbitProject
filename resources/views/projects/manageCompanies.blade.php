@@ -118,7 +118,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    onclick="return confirm('Are you sure to delete this feedback?')"
+                                                    onclick="return confirm('Are you sure to delete this company from this project?')"
                                                     class="text-red-600 font-bold hover:text-red-800"
                                                     style="border: none; background: none; cursor: pointer;">Delete</button>
                                             </form>
