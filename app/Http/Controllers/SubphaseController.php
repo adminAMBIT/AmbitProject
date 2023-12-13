@@ -77,11 +77,11 @@ class SubphaseController extends Controller
         $instructions = $subphase->instructions;
 
         if (auth()->user()->is_admin || $phase->is_private == 0) {
-            $documents = $subphase->documents->sortBy('company_id');
+            $documents = $subphase->documents;
         } else {
             $documents = $subphase->documents->where('company_id', auth()->user()->company_id)->concat($subphase->documents->where('company_id', null));
         }
-        
+
         return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases', 'documents', 'instructions'));
     }
 
@@ -110,7 +110,7 @@ class SubphaseController extends Controller
         $subphase->save();
 
         session()->flash('updated', 'Subphase updated successfully');
-        
+
         if ($subphase->subphase_parent_id == null) {
             return redirect()->route('projects.phases.show', [$project_id, $phase_id]);
         } else {
@@ -134,6 +134,33 @@ class SubphaseController extends Controller
         } else {
             return redirect()->route('projects.phases.subphases.show', [$project_id, $phase_id, $subphase_parent_id]);
         }
+    }
+
+    public function showDocuments(string $project_id, string $phase_id, string $subphase_id)
+    {
+        $project = Project::find($project_id);
+        $phase = Phase::find($phase_id);
+        $subphase = Subphase::find($subphase_id);
+        $companies = $project->companies;
+        $parentSubphases = $subphase->getAllParentSubphases();
+        $documents = $subphase->documents;
+
+        return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents'));
+    }
+
+    public function showFilteredDocuments(Request $request, string $project_id, string $phase_id, string $subphase_id)
+    {
+        $project = Project::find($project_id);
+        $phase = Phase::find($phase_id);
+        $subphase = Subphase::find($subphase_id);
+        $companies = $project->companies;
+        $parentSubphases = $subphase->getAllParentSubphases();
+
+        $documents = $subphase->documents->where('company_id', $request->company_id);
+
+        return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents'));
+
+
     }
 
 }

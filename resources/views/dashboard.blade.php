@@ -61,7 +61,12 @@
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
                                                     $document->project->title }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    {{ $document->user->name }} ({{ $document->company->name }})</td>
+                                                    @if ($document->company_id != null)
+                                                    {{ $document->user->name }} ({{ $document->company->name }})
+                                                    @else
+                                                    {{ $document->user->name }}
+                                                    @endif
+                                                </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
                                                     $document->updated_at->diffForHumans() }}
                                                 </td>

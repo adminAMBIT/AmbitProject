@@ -242,12 +242,17 @@
                         <h1 class="text-xl font-medium text-gray-500">Documents</h1>
                     </div>
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-4">
+                        @if(auth()->user()->is_admin == 1 && $documents->count() > 0)
+                        <a href="{{ route('projects.phases.subphases.companies.index',['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase, 'subphase_id'=>$subphase->id]) }}"
+                           class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                            Filter by Company
+                        </a>
+                        @endif
                         <a href="{{ route('projects.phases.subphases.document.create', ['project_id'=>$subphase->phase->project->id, 'phase_id'=>$subphase->phase, 'subphase_id'=>$subphase->id]) }}"
                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Upload Documents
                         </a>
                     </div>
-                    
                 </div>
                 <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -277,7 +282,7 @@
                                     @if($documents->count() == 0)
                                     <tbody class="divide-y divide-gray-200 bg-white">
                                         <tr>
-                                            <td colspan="4"
+                                            <td colspan="5"
                                                 class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 sm:pl-6">
                                                 No documents found</td>
                                         </tr>
