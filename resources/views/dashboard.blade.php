@@ -13,7 +13,7 @@
     </x-slot>
 
     <div class="py-4">
-        <div class="max-w-fit mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden py-4 shadow-xl sm:rounded-lg">
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="sm:flex sm:items-center">
@@ -25,7 +25,7 @@
 
                     
                     <div class="mt-8 flow-root">
-                        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="-mx-4 bg-gray-100 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                 <livewire:last-documents-table />
                             </div>

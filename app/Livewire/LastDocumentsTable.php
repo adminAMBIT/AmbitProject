@@ -8,7 +8,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
 use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Footer;
 use PowerComponents\LivewirePowerGrid\Header;
@@ -49,7 +48,6 @@ final class LastDocumentsTable extends PowerGridComponent
             ->limit(30)
             ->toSql();
 
-
         return Document::fromSub($subquery, 'alias_subquery');
     }
 
@@ -76,6 +74,7 @@ final class LastDocumentsTable extends PowerGridComponent
     {
         return [
             Column::make('Name', 'name')
+                ->headerAttribute('class', 'bg-gray-100')
                 ->sortable()
                 ->searchable(),
 
