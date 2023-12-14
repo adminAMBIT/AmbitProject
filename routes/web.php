@@ -104,9 +104,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/companies', [SubphaseController::class,'showDocuments'])->name('projects.phases.subphases.companies.index')->middleware('admin');
     Route::post('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/companies', [SubphaseController::class,'showFilteredDocuments'])->middleware('admin');
 
-
-
-
     // DOCUMENTS
     Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/upload-documents', [DocumentController::class, 'create'])->name('projects.phases.subphases.document.create');
     Route::post('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/upload-documents', [DocumentController::class, 'store'])->name('projects.phases.subphases.document.store');

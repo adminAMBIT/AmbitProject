@@ -90,7 +90,11 @@
                                     <select id="company_id" name="company_id"
                                         class="mt-2 flex-1 block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         @foreach ($companies as $company)
+                                        @if($company->id == $company_selected_id)
+                                        <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
+                                        @else
                                         <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                     <button type="submit"

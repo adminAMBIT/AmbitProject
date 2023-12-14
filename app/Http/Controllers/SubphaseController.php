@@ -155,10 +155,12 @@ class SubphaseController extends Controller
         $subphase = Subphase::find($subphase_id);
         $companies = $project->companies;
         $parentSubphases = $subphase->getAllParentSubphases();
+        $company_selected_id = $request->company_id;
 
-        $documents = $subphase->documents->where('company_id', $request->company_id);
+        $documents = $subphase->documents->where('company_id', $company_selected_id);
 
-        return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents'));
+
+        return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents', 'company_selected_id'));
 
 
     }
