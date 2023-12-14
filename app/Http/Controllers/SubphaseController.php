@@ -144,8 +144,9 @@ class SubphaseController extends Controller
         $companies = $project->companies;
         $parentSubphases = $subphase->getAllParentSubphases();
         $documents = $subphase->documents;
+        $company_selected_id = null;
 
-        return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents'));
+        return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents', 'company_selected_id'));
     }
 
     public function showFilteredDocuments(Request $request, string $project_id, string $phase_id, string $subphase_id)
@@ -161,8 +162,6 @@ class SubphaseController extends Controller
 
 
         return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents', 'company_selected_id'));
-
-
     }
 
 }
