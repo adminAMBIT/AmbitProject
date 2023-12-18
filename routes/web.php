@@ -103,6 +103,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::delete('/projects/{project_id}/phases/{phase_id}/delete-subphase/{subphase_id}', [SubphaseController::class, 'destroy'])->name('projects.phases.subphases.destroy')->middleware('admin');
     Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/companies', [SubphaseController::class,'showDocuments'])->name('projects.phases.subphases.companies.index')->middleware('admin');
     Route::post('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/companies', [SubphaseController::class,'showFilteredDocuments'])->middleware('admin');
+    Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/companies/{company_id}', [SubphaseController::class,'downloadSubphaseDocuments'])->name('projects.phases.subphases.company.downloadAll')->middleware('admin');
 
     // DOCUMENTS
     Route::get('/projects/{project_id}/phases/{phase_id}/subphases/{subphase_id}/upload-documents', [DocumentController::class, 'create'])->name('projects.phases.subphases.document.create');

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Company;
 use App\Models\Phase;
-use App\Models\Subphase;
 use App\Models\Project;
+use App\Models\Subphase;
+use Illuminate\Http\Request;
+use ZipArchive;
 
 class SubphaseController extends Controller
 {
@@ -161,8 +163,28 @@ class SubphaseController extends Controller
 
         $documents = $subphase->documents->where('company_id', $company_selected_id);
 
-
         return view('subphases.documents', compact('project', 'phase', 'subphase', 'parentSubphases', 'companies', 'documents', 'company_selected_id'));
+    }
+
+    public function downloadSubphaseDocuments(string $project_id, string $phase_id, string $subphase_id, string $company_id){
+        $project = Project::find($project_id);
+        $subphase = Subphase::find($subphase_id);
+        $company = Company::find($company_id);
+
+        $documents = $subphase->documents->where('company_id', $company_id);
+
+        $zip = new ZipArchive;
+        $zipFileName = $project->title . '_'. $subphase->name. '_' . $company->name . '.zip';
+        $zip->open(storage_path('app/public/documents/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($documents as $document) {
+            $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
+            $zip->addFile($path, $document->downloadPath . '.' . $document->name . '.' . $document->extension);
+        }
+
+        $zip->close();
+
+        return response()->download(storage_path('app/public/documents/' . $zipFileName))->deleteFileAfterSend(true);
     }
 
 }

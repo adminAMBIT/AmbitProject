@@ -87,8 +87,9 @@
                                 <label for="company_id"
                                     class="block text-sm font-medium leading-6 text-gray-900">Company Name</label>
                                 <div class="flex items-center">
-                                    <select id="company_id" name="company_id"
+                                    <select id="company_id" name="company_id" required
                                         class="mt-2 flex-1 block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        <option value="">Select a company</option>
                                         @foreach ($companies as $company)
                                         @if($company->id == $company_selected_id)
                                         <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
@@ -98,7 +99,6 @@
                                         @endforeach
                                     </select>
                                     <button type="submit"
-                                        href="{{ route('projects.manageCompanies.store',['project_id'=>$project->id]) }}"
                                         class="ml-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-2">Filter</button>
                                 </div>
                             </div>
@@ -106,12 +106,18 @@
                     </div>
                 </div>
             </form>
-
         </div>
 
-        <div class="mt-8 flow-root">
+        <div class="mt-4 flow-root">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    @if(isset($company_selected_id))
+                    <div class="flex justify-end mb-3 ">
+                        <a type="submit" href="{{ route('projects.phases.subphases.company.downloadAll', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id, 'company_id'=>$company_selected_id]) }}"
+                            class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-2">Download
+                            All Documents</a>
+                    </div>
+                    @endif
                     <div class="overflow-hidden bg-white shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead class="bg-gray-50">
@@ -173,6 +179,9 @@
                                         <div class="flex justify-center items-center">
                                             <a href="{{ route('document.show', ['document_id'=>$document->id]) }}"
                                                 class="text-indigo-600 font-bold hover:text-indigo-800">Show</a>
+
+                                            <a href="{{ route('document.download', ['document_id'=>$document->id]) }}"
+                                                class="ml-3 text-green-600 font-bold hover:text-green-800">Download</a>
                                         </div>
                                     </td>
                                 </tr>
