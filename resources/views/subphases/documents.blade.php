@@ -111,7 +111,7 @@
         <div class="mt-4 flow-root">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    @if(isset($company_selected_id))
+                    @if(isset($company_selected_id) && $documents->count() > 0)
                     <div class="flex justify-end mb-3 ">
                         <a type="submit" href="{{ route('projects.phases.subphases.company.downloadAll', ['project_id'=>$project->id, 'phase_id'=>$phase->id, 'subphase_id'=>$subphase->id, 'company_id'=>$company_selected_id]) }}"
                             class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-2">Download
