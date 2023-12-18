@@ -88,7 +88,7 @@
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="text-xl font-medium text-gray-500">Instructions</h1>
-                        <p class="text-red-600">{!! nl2br($subphase->description) !!}</p>
+                        <p class="text-red-600" style="white-space: pre-wrap;">{!! e($subphase->description) !!}</p>
                     </div>
                     @if(auth()->user()->is_admin == 1)
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">

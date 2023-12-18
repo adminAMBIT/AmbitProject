@@ -42,7 +42,7 @@ class SubphaseController extends Controller
         // CREATE SUBPHASE
         $subphase = Subphase::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $request->input('description'),
             'phase_id' => session('phase_id'),
             'subphase_parent_id' => $parent_id,
             'has_documents' => $request->has_documents,
@@ -82,6 +82,7 @@ class SubphaseController extends Controller
             $documents = $subphase->documents->where('company_id', auth()->user()->company_id)->concat($subphase->documents->where('company_id', null));
         }
 
+
         return view('subphases.show', compact('subphase', 'subphaseChildren', 'project', 'phase', 'parentSubphases', 'documents', 'instructions'));
     }
 
@@ -103,7 +104,7 @@ class SubphaseController extends Controller
         $subphase = Subphase::find($subphase_id);
 
         $subphase->name = $request->name;
-        $subphase->description = $request->description;
+        $subphase->description = $request->input('description');
         $subphase->has_documents = $request->has_documents;
         $subphase->has_instructions = $request->has_instructions;
 
