@@ -46,7 +46,7 @@ class DocumentController extends Controller
      */
     public function store(Request $request, string $project_id, string $phase_id, string $subphase_id)
     {
-        try{
+        try {
             $request->validate([
                 'files.*' => 'required|max:20000'
             ]);
@@ -109,8 +109,16 @@ class DocumentController extends Controller
         $document = Document::find($id);
         $project = $document->subphase->phase->project;
         $path = storage_path('app/public/documents/' . $project->title . '/' . $document->id . '.' . $document->extension);
-        return response()->download($path, $document->downloadPath . '.' . $document->name . '.' . $document->extension);
+
+        // Reemplaza los caracteres no válidos en el nombre del archivo
+        $safeName = str_replace(['/', '\\'], '-', $document->name);
+
+        // Construye el nombre del archivo para la descarga sin caracteres inválidos
+        $downloadName = $safeName . '.' . $document->extension;
+
+        return response()->download($path, $downloadName);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -243,7 +251,7 @@ class DocumentController extends Controller
         $fileName .= '.zip';
         $zip->open(storage_path('app/public/documents/' . $fileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
         foreach ($documents as $document) {
-            try{
+            try {
                 $path = storage_path('app/public/documents/' . $project->title . '/' . $document['id'] . '.' . $document['extension']);
                 $zip->addFile($path, $document['downloadPath'] . '.' . $document['name'] . '.' . $document['extension']);
             } catch (\Throwable $th) {
