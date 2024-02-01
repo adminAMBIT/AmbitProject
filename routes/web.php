@@ -11,7 +11,6 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RepresentantController;
 use App\Http\Controllers\SubphaseController;
 use App\Http\Controllers\UserTypeController;
-use App\Models\Instruction;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,10 +24,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Coloca esto al final de tu archivo web.php
 
-Route::get('/', function () {
-    return redirect(route('login'));
-});
+Route::get('/{path?}', function(){
+    return view('manteniance.show');
+})->where('path', '.*')->name('maintenance');
+
+
+// Route::get('/', function () {
+//     return redirect(route('login'));
+// });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
