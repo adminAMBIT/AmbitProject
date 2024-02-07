@@ -186,6 +186,7 @@ class CompanyController extends Controller
                 ->where('documents.company_id', $company->id)
                 ->where('documents.project_id', $project_id)
                 ->orderBy('subphases.name')
+                ->select('documents.*', 'subphases.name as subphase_name', 'subphases.id as subphase_id')
                 ->get();
 
             return view('companies.showDocuments', compact('company', 'documents', 'project'));
