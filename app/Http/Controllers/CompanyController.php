@@ -173,8 +173,13 @@ class CompanyController extends Controller
                 ->where('documents.company_id', $company->id)
                 ->where('documents.project_id', $project_id)
                 ->orderBy('subphases.name')
+                ->select('documents.*', 'subphases.name as subphase_name', 'subphases.id as subphase_id')
                 ->get();
-            return view('companies.showDocuments', compact('company', 'documents', 'project'));
+            return view('companies.showDocuments',[
+                'company' => $company,
+                'documents' => $documents,
+                'project' => $project,
+            ]);
         } else {
             $company = Auth::user()->company;
             $documents = Document::join('subphases', 'documents.subphase_id', '=', 'subphases.id')
