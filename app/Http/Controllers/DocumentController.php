@@ -230,19 +230,20 @@ class DocumentController extends Controller
         $documents = [];
 
         if ($request->correct) {
-            $correctDocuments = Document::where('status', 'correct')->get()->toArray();
+            $correctDocuments = Document::where('status', 'correct')->where('company_id', $company_id)->where('project_id', $project_id)
+                                ->get()->toArray();
             $fileName .= '_correct';
             $documents = array_merge($documents, $correctDocuments);
         }
 
         if ($request->pending) {
-            $pendingDocuments = Document::where('status', 'pending')->get()->toArray();
+            $pendingDocuments = Document::where('status', 'pending')->where('company_id', $company_id)->where('project_id', $project_id)->get()->toArray();
             $fileName .= '_pending';
             $documents = array_merge($documents, $pendingDocuments);
         }
 
         if ($request->incorrect) {
-            $incorrectDocuments = Document::where('status', 'incorrect')->get()->toArray();
+            $incorrectDocuments = Document::where('status', 'incorrect')->where('company_id', $company_id)->where('project_id', $project_id)->get()->toArray();
             $fileName .= '_incorrect';
             $documents = array_merge($documents, $incorrectDocuments);
         }
