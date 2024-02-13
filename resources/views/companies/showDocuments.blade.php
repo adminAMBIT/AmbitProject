@@ -55,7 +55,7 @@
     </x-slot>
 
 
-    <div class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto mt-4 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
             <div class="p-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-center">
@@ -87,10 +87,10 @@
                                                 Subphase</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                                Uploaded by</th>
+                                                Status</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                                Status</th>
+                                                Uploaded at</th>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm text-center font-semibold text-gray-900 sm:pl-6">
                                                 Actions</th>
@@ -117,21 +117,21 @@
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                 {{ $document->subphase->name }} ({{ $document->subphase->phase->name }})
                                             </td>
-                                            <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {{ $document->user->name}}
-                                            </td>
                                             @if($document->status == 'pending')
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-yellow-500 sm:pl-6">
                                                 @elseif($document->status == 'correct')
-                                                <td
+                                            <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-green-500 sm:pl-6">
                                                 @elseif($document->status == 'incorrect')
-                                                <td
+                                            <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-red-700 sm:pl-6">
                                                 @endif
                                                 {{ strtoupper($document->status) }}
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-700 sm:pl-6">
+                                                {{ $document->getFormatedCreatedAtAttribute() }}
                                             </td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">

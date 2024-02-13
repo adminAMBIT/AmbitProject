@@ -44,4 +44,9 @@ class Document extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function getFormatedCreatedAtAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
 }
