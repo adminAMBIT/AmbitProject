@@ -112,7 +112,10 @@
                                         <thead class="bg-gray-50">
                                             <tr>
                                                 <th scope="col"
-                                                    class="py-3.5 pl-4 pr-3 text-sm text-center font-semibold text-gray-900 sm:pl-6">
+                                                    class="py-3.5 pl-2 text-center text-sm font-semibold text-gray-900">
+                                                    <input id="selectAll" aria-describedby="comments-description"
+                                                        name="documents_ids[]" type="checkbox"
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                                 </th>
                                                 <th scope="col"
                                                     class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
@@ -143,7 +146,7 @@
                                                     <input id="document_{{ $document->id }}"
                                                         aria-describedby="comments-description" name="documents_ids[]"
                                                         type="checkbox" value="{{ $document->id }}"
-                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                                        class="document-checkbox h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -186,7 +189,14 @@
         </div>
     </div>
 
-
+    <script>
+        document.getElementById('selectAll').addEventListener('change', function () {
+            var checkboxes = document.querySelectorAll('.document-checkbox');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        });
+    </script>
 
 
 
