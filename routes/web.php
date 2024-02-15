@@ -118,6 +118,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/project/{project_id}/company/{company_id}/downloadAll', [DocumentController::class,'downloadAll'])->name('projects.companies.documents.downloadAll')->middleware('admin');
     Route::get('/projects/{project_id}/company/{company_id}/downloadForm', [DocumentController::class, 'downloadForm'])->name('projects.companies.documents.downloadForm')->middleware('admin');
     Route::post('/projects/{project_id}/company/{company_id}/downloadForm', [DocumentController::class, 'downloadByStatus'])->middleware('admin');
+    Route::get('/projects/{project_id}/company/{company_id}/documents/status', [DocumentController::class,'showStatus'])->name('projects.companies.documents.status')->middleware('admin');
+    Route::post('/projects/{project_id}/company/{company_id}/documents/status', [DocumentController::class,'storeStatus'])->middleware('admin');
+
 
 
     // FEEDBACK

@@ -175,7 +175,7 @@ class CompanyController extends Controller
                 ->orderBy('subphases.name')
                 ->select('documents.*', 'subphases.name as subphase_name', 'subphases.id as subphase_id')
                 ->get();
-            return view('companies.showDocuments',[
+            return view('companies.showDocuments', [
                 'company' => $company,
                 'documents' => $documents,
                 'project' => $project,

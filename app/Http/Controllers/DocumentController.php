@@ -263,4 +263,43 @@ class DocumentController extends Controller
 
         return response()->download(storage_path('app/public/documents/' . $fileName))->deleteFileAfterSend(true);
     }
+
+    public function showStatus(string $project_id, string $company_id)
+    {
+        $project = Project::find($project_id);
+
+        $company = Company::find($company_id);
+        $documents = Document::join('subphases', 'documents.subphase_id', '=', 'subphases.id')
+            ->where('documents.company_id', $company->id)
+            ->where('documents.project_id', $project_id)
+            ->orderBy('subphases.name')
+            ->select('documents.*', 'subphases.name as subphase_name', 'subphases.id as subphase_id')
+            ->get();
+
+
+        return view('documents.changeStatus', [
+            'project' => $project,
+            'company' => $company,
+            'documents' => $documents,
+        ]);
+    }
+
+    public function storeStatus(Request $request, string $project_id, string $company_id)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:correct,incorrect,pending',
+        ]);
+
+        if (empty($request->documents_ids)) {
+            return redirect()->route('projects.companies.documents.status', [$project_id, $company_id])->with('error', 'No documents selected');
+        }
+
+        foreach ($request->documents_ids as $document_id) {
+            $document = Document::find($document_id);
+            $document->status = $validated['status'];
+            $document->save();
+        }
+
+        return redirect()->route('projects.companies.documents.index', [$project_id, $company_id])->with('success', 'Status changed successfully');
+    }
 }

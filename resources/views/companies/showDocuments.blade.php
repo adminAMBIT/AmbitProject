@@ -54,6 +54,9 @@
         </div>
     </x-slot>
 
+    @if (session('success'))
+    <x-green-alert message="{{ session('success') }}" />
+    @endif
 
     <div class="mx-auto mt-4 px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden mt-4 px-4 bg-white shadow sm:rounded-lg">
@@ -66,10 +69,15 @@
                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                         @if($documents->isNotEmpty())
                         <a type="button"
+                            href="{{ route('projects.companies.documents.status', ['project_id'=>$project->id, 'company_id'=>$company->id])}}"
+                            class="inline-block rounded-md bg-gray-600 px-3 mr-2 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Change Status</a>
+
+                        <a type="button"
                             href="{{ route('projects.companies.documents.downloadForm', ['project_id'=>$project->id, 'company_id'=>$company->id]) }}"
-                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Download
+                            class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Download
                             Documents</a>
                         @endif
+
                     </div>
                 </div>
                 <div class="mt-8 flow-root">
@@ -101,7 +109,7 @@
                                         @if($documents->isEmpty())
                                         <tr>
                                             <td colspan="5"
-                                                class="py-4 text-center pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6">
+                                                class="py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6">
                                                 No documents found
                                             </td>
                                         </tr>
@@ -109,8 +117,8 @@
                                         @foreach ($documents as $document)
                                         <tr>
                                             <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hover:underline">
-                                                <a href="{{ route('document.show', ['document_id'=>$document->id]) }}">{{
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 ">
+                                                <a class="hover:underline" href="{{ route('document.show', ['document_id'=>$document->id]) }}">{{
                                                     $document->name }}.{{ $document->extension }}</a>
                                             </td>
                                             <td
@@ -130,7 +138,7 @@
                                                 {{ strtoupper($document->status) }}
                                             </td>
                                             <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-700 sm:pl-6">
+                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-700 sm:pl-6">
                                                 {{ $document->getFormatedCreatedAtAttribute() }}
                                             </td>
                                             <td
