@@ -290,11 +290,18 @@ class DocumentController extends Controller
             'status' => 'required|in:correct,incorrect,pending',
         ]);
 
-        if (empty($request->documents_ids)) {
+        $documents_ids = $request->documents_ids;
+
+        if (empty($documents_ids)) {
             return redirect()->route('projects.companies.documents.status', [$project_id, $company_id])->with('error', 'No documents selected');
         }
 
-        foreach ($request->documents_ids as $document_id) {
+        if ($documents_ids[0] == 'on') {
+            $documents_ids = array_slice($documents_ids, 1);
+        }
+
+
+        foreach ($documents_ids as $document_id) {
             $document = Document::find($document_id);
             $document->status = $validated['status'];
             $document->save();

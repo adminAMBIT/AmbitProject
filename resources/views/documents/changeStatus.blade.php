@@ -190,13 +190,35 @@
     </div>
 
     <script>
-        document.getElementById('selectAll').addEventListener('change', function () {
+        document.getElementById('selectAll').addEventListener('change', function() {
             var checkboxes = document.querySelectorAll('.document-checkbox');
             for (var checkbox of checkboxes) {
                 checkbox.checked = this.checked;
             }
         });
+    
+        // Agregar listener a cada checkbox de clase 'document-checkbox'
+        var documentCheckboxes = document.querySelectorAll('.document-checkbox');
+        for (var checkbox of documentCheckboxes) {
+            checkbox.addEventListener('change', function() {
+                // Si algún checkbox 'document-checkbox' se desmarca, también desmarca 'selectAll'
+                if (!this.checked) {
+                    document.getElementById('selectAll').checked = false;
+                } else {
+                    // Verificar si todos los checkboxes están marcados, si es así, marcar 'selectAll'
+                    var allChecked = true;
+                    for (var checkbox of documentCheckboxes) {
+                        if (!checkbox.checked) {
+                            allChecked = false;
+                            break;
+                        }
+                    }
+                    document.getElementById('selectAll').checked = allChecked;
+                }
+            });
+        }
     </script>
+    
 
 
 
