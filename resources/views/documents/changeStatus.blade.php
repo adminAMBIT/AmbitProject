@@ -197,11 +197,9 @@
             }
         });
     
-        // Agregar listener a cada checkbox de clase 'document-checkbox'
         var documentCheckboxes = document.querySelectorAll('.document-checkbox');
         for (var checkbox of documentCheckboxes) {
             checkbox.addEventListener('change', function() {
-                // Si algún checkbox 'document-checkbox' se desmarca, también desmarca 'selectAll'
                 if (!this.checked) {
                     document.getElementById('selectAll').checked = false;
                 } else {
