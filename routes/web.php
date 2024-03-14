@@ -81,6 +81,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/companies/contacts/{id}/edit', [ContactController::class, 'edit'])->name('contacts.edit')->middleware('admin');
     Route::post('/companies/contacts/{id}/edit', [ContactController::class, 'update'])->middleware('admin');
     Route::delete('/companies/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy')->middleware('admin');
+    Route::post('/companies/contacts/{contact_id}/edit/change-password', [ContactController::class, 'changePasswd'])->name('contacts.change-passwd')->middleware('admin');
 
     // MANAGE COMPANIES
     Route::get('/projects/{project_id}/manage-companies', [ProjectController::class, 'manageCompanies'])->name('projects.manageCompanies.index')->middleware('admin');

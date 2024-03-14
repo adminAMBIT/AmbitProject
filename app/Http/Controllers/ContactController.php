@@ -158,4 +158,27 @@ class ContactController extends Controller
 
         return redirect()->route('companies.show', ['id' => $contact->company_id]);
     }
+
+    public function changePasswd(Request $request, string $contact_id)
+    {
+        $customMessages = [
+            'required' => 'The :attribute field is required.',
+            'same' => 'The new password and the confirmation must be the same.',
+        ];
+
+        $validated = $request->validate([
+            'new-password' => 'required',
+            'confirm-new-password' => 'required | same:new-password',
+        ], $customMessages);
+
+        $contact = User::find($contact_id);
+
+        $contact->password = bcrypt($validated['new-password']);
+
+        $contact->save();
+
+        session()->flash('passwdUpdated', 'Password updated successfully');
+
+        return redirect()->route('contacts.show', ['id' => $contact_id]);
+    }
 }
