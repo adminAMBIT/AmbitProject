@@ -37,7 +37,7 @@
 
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
                             <div class="sm:col-span-3">
-                                <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                                <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name *</label>
                                 <div class="mt-2">
                                     <input type="text" name="name" id="name" autocomplete="given-name" required
                                         value="{{ old('name') }}"
@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Phone
+                                <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Phone *
                                 </label>
                                 <div class="mt-2">
                                     <input id="phone" name="phone" type="text" required value="{{ old('phone') }}"
