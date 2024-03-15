@@ -6,7 +6,7 @@
         </x-slot>
 
         <div class="mb-4 text-xl text-center text-gray-600">
-            {{ __('If you do not remember your password, please send an email to') }} <strong>info@ambit.com</strong> or <strong>admin@ambit.com</strong> {{ __('to inform us, and we will assist you in the process of resetting it.') }}
+            {{ __('If you do not remember your password, please send an email to') }} <strong>info@ambitcluster.org</strong> or <strong>admin@ambitcluster.org</strong> {{ __('to inform us, and we will assist you in the process of resetting it.') }}
         </div>
 
         @if (session('status'))
